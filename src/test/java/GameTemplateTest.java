@@ -1,7 +1,7 @@
 package test.java;
 
+import main.java.GameTemplate;
 import main.java.Play;
-import main.java.RPSGameTemplate;
 import main.java.StrategyType;
 import main.java.exceptions.NoSuchStrategyError;
 import main.java.exceptions.RPSException;
@@ -14,52 +14,53 @@ import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
 
-public class RPSGameTemplateTest {
+public class GameTemplateTest {
 
-    private RPSGameTemplate rpsGameTemplate = new RPSGameTemplate(new ChainOfValidationFactory());
+    private static final String ARMANDO = "Armando";
+    private GameTemplate gameTemplate = new GameTemplate(new ChainOfValidationFactory());
 
     @Test
     public void shouldReturnWinnerR() throws RPSException {
-        assertEquals(new Play("Armando", StrategyType.R), rpsGameTemplate.rps_game_winner(Arrays.asList(new Play("Armando", StrategyType.R), new Play("Dave", StrategyType.S))));
+        assertEquals(new Play(ARMANDO, StrategyType.R), gameTemplate.gameWinner(Arrays.asList(new Play(ARMANDO, StrategyType.R), new Play("Dave", StrategyType.S))));
     }
 
     @Test
     public void shouldReturnWinnerS() throws RPSException {
-        assertEquals(new Play("Armando", StrategyType.S), rpsGameTemplate.rps_game_winner(Arrays.asList(new Play("Armando", StrategyType.S), new Play("Dave", StrategyType.P))));
+        assertEquals(new Play(ARMANDO, StrategyType.S), gameTemplate.gameWinner(Arrays.asList(new Play(ARMANDO, StrategyType.S), new Play("Dave", StrategyType.P))));
     }
 
     @Test
     public void shouldReturnWinnerP() throws RPSException {
-        assertEquals(new Play("Armando", StrategyType.P), rpsGameTemplate.rps_game_winner(Arrays.asList(new Play("Armando", StrategyType.P), new Play("Dave", StrategyType.R))));
+        assertEquals(new Play(ARMANDO, StrategyType.P), gameTemplate.gameWinner(Arrays.asList(new Play(ARMANDO, StrategyType.P), new Play("Dave", StrategyType.R))));
     }
 
     @Test
     public void shouldReturnWinnerSecondPlayer() throws RPSException {
-        assertEquals(new Play("Dave", StrategyType.S), rpsGameTemplate.rps_game_winner(Arrays.asList(new Play("Armando", StrategyType.P), new Play("Dave", StrategyType.S))));
+        assertEquals(new Play("Dave", StrategyType.S), gameTemplate.gameWinner(Arrays.asList(new Play(ARMANDO, StrategyType.P), new Play("Dave", StrategyType.S))));
     }
 
     @Test
     public void shouldReturnWinnerWithDraw() throws RPSException {
-        assertEquals(new Play("Armando", StrategyType.S), rpsGameTemplate.rps_game_winner(Arrays.asList(new Play("Armando", StrategyType.S), new Play("Dave", StrategyType.S))));
+        assertEquals(new Play(ARMANDO, StrategyType.S), gameTemplate.gameWinner(Arrays.asList(new Play(ARMANDO, StrategyType.S), new Play("Dave", StrategyType.S))));
     }
 
     @Test(expected = WrongNumberOfPlayersError.class)
     public void shouldReturnErrorIfPlayersIsLessThanTwo() throws RPSException {
-        rpsGameTemplate.rps_game_winner(Collections.singletonList(new Play("Armando", StrategyType.P)));
+        gameTemplate.gameWinner(Collections.singletonList(new Play(ARMANDO, StrategyType.P)));
     }
 
     @Test(expected = WrongNumberOfPlayersError.class)
     public void shouldReturnErrorIfPlayersIsGreaterThanTwo() throws RPSException {
-        rpsGameTemplate.rps_game_winner(Arrays.asList(new Play("Armando", StrategyType.P), new Play("Dave", StrategyType.S), new Play("Mike", StrategyType.R)));
+        gameTemplate.gameWinner(Arrays.asList(new Play(ARMANDO, StrategyType.P), new Play("Dave", StrategyType.S), new Play("Mike", StrategyType.R)));
     }
 
     @Test(expected = WrongNumberOfPlayersError.class)
     public void shouldReturnErrorIfPlayersIsNull() throws RPSException {
-        rpsGameTemplate.rps_game_winner(null);
+        gameTemplate.gameWinner(null);
     }
 
     @Test(expected = NoSuchStrategyError.class)
     public void shouldReturnErrorIfPlayersStrategyIsSomethingOtherThanRPS() throws RPSException {
-        rpsGameTemplate.rps_game_winner(Arrays.asList(new Play("Armando", null), new Play("Dave", null)));
+        gameTemplate.gameWinner(Arrays.asList(new Play(ARMANDO, null), new Play("Dave", null)));
     }
 }

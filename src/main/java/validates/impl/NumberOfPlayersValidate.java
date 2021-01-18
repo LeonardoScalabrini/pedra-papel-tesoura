@@ -6,7 +6,9 @@ import main.java.exceptions.WrongNumberOfPlayersError;
 import main.java.validates.BaseValidate;
 
 import java.util.List;
-import java.util.Optional;
+
+import static java.util.Collections.emptyList;
+import static java.util.Optional.ofNullable;
 
 public class NumberOfPlayersValidate extends BaseValidate {
 
@@ -14,10 +16,7 @@ public class NumberOfPlayersValidate extends BaseValidate {
 
     @Override
     public void valid(List<Play> plays) throws RPSException {
-
-        Optional.ofNullable(plays).orElseThrow(WrongNumberOfPlayersError::new);
-
-        if (plays.size() != NUMBER_OF_PLAYER)
+        if (ofNullable(plays).orElse(emptyList()).size() != NUMBER_OF_PLAYER)
             throw new WrongNumberOfPlayersError();
 
         super.valid(plays);

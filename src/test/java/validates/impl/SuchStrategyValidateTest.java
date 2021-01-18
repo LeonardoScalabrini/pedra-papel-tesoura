@@ -7,7 +7,6 @@ import main.java.exceptions.RPSException;
 import main.java.validates.impl.SuchStrategyValidate;
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 public class SuchStrategyValidateTest {
@@ -16,7 +15,7 @@ public class SuchStrategyValidateTest {
 
     @Test(expected = NoSuchStrategyError.class)
     public void shouldReturnErroIfNotIsStrategy() throws RPSException {
-        suchStrategyValidate.valid(Arrays.asList(new Play("", null)));
+        suchStrategyValidate.valid(Collections.singletonList(new Play("", null)));
     }
 
     @Test
@@ -31,6 +30,6 @@ public class SuchStrategyValidateTest {
 
     @Test
     public void notShouldReturnErroIfIsStrategy() throws RPSException {
-        suchStrategyValidate.valid(Arrays.asList(new Play("", StrategyType.P)));
+        suchStrategyValidate.valid(Collections.singletonList(new Play("", StrategyType.P)));
     }
 }

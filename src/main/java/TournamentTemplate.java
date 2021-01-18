@@ -5,14 +5,15 @@ import main.java.exceptions.WrongNumberOfPlayersError;
 import main.java.iterators.impl.TournamentIterator;
 
 import java.util.List;
+
 import static java.util.Optional.ofNullable;
 
-public class RPSTournamentTemplate {
+public class TournamentTemplate {
 
-    private final RPSGameTemplate gameTemplate;
+    private final GameTemplate gameTemplate;
     private final TournamentIterator tournamentIterator;
 
-    public RPSTournamentTemplate(RPSGameTemplate gameTemplate, TournamentIterator tournamentIterator) {
+    public TournamentTemplate(GameTemplate gameTemplate, TournamentIterator tournamentIterator) {
         this.gameTemplate = gameTemplate;
         this.tournamentIterator = tournamentIterator;
     }

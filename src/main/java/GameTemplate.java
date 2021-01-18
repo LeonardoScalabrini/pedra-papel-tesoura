@@ -6,17 +6,17 @@ import main.java.validates.BaseValidate;
 
 import java.util.List;
 
-public class RPSGameTemplate {
+public class GameTemplate {
 
     private static final int PLAYER_ONE = 0;
     private static final int PLAYER_TWO = 1;
     private final ChainOfValidationFactory chainOfValidationFactory;
 
-    public RPSGameTemplate(ChainOfValidationFactory chainOfValidationFactory) {
+    public GameTemplate(ChainOfValidationFactory chainOfValidationFactory) {
         this.chainOfValidationFactory = chainOfValidationFactory;
     }
 
-    public Play rps_game_winner(List<Play> plays) throws RPSException {
+    public Play gameWinner(List<Play> plays) throws RPSException {
 
         BaseValidate baseValidate = chainOfValidationFactory.create();
 
