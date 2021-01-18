@@ -34,7 +34,7 @@ public class RPSTournamentTemplateTest {
         tournament.add(groupA);
         tournament.add(groupB);
 
-        assertEquals(new Play("Richard", StrategyType.R), rpsTournamentTemplate.rps_tournament_winner(tournament));
+        assertEquals(new Play("Richard", StrategyType.R), rpsTournamentTemplate.tournamentWinner(tournament));
     }
 
     @Test
@@ -46,7 +46,7 @@ public class RPSTournamentTemplateTest {
 
         tournament.add(groupA);
 
-        assertEquals(new Play("Richard", StrategyType.R), rpsTournamentTemplate.rps_tournament_winner(tournament));
+        assertEquals(new Play("Richard", StrategyType.R), rpsTournamentTemplate.tournamentWinner(tournament));
     }
 
     @Test
@@ -64,7 +64,7 @@ public class RPSTournamentTemplateTest {
         tournament.add(groupB);
         tournament.add(groupA);
 
-        assertEquals(new Play("Richard", StrategyType.R), rpsTournamentTemplate.rps_tournament_winner(tournament));
+        assertEquals(new Play("Richard", StrategyType.R), rpsTournamentTemplate.tournamentWinner(tournament));
     }
 
     @Test
@@ -83,11 +83,11 @@ public class RPSTournamentTemplateTest {
         tournament.add(groupA);
         tournament.add(groupB);
 
-        assertEquals(new Play("Richard", StrategyType.R), rpsTournamentTemplate.rps_tournament_winner(tournament));
+        assertEquals(new Play("Richard", StrategyType.R), rpsTournamentTemplate.tournamentWinner(tournament));
     }
 
     @Test(expected = WrongNumberOfPlayersError.class)
     public void shouldReturnErrorIfPlayersIsNull() throws RPSException {
-        rpsTournamentTemplate.rps_tournament_winner(null);
+        rpsTournamentTemplate.tournamentWinner(null);
     }
 }

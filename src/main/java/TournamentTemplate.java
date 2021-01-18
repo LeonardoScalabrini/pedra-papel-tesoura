@@ -5,7 +5,7 @@ import main.java.exceptions.WrongNumberOfPlayersError;
 import main.java.iterators.impl.TournamentIterator;
 
 import java.util.List;
-import java.util.Optional;
+import static java.util.Optional.ofNullable;
 
 public class RPSTournamentTemplate {
 
@@ -17,8 +17,10 @@ public class RPSTournamentTemplate {
         this.tournamentIterator = tournamentIterator;
     }
 
-    public Play rps_tournament_winner(List<List<List<Play>>> tournament) throws RPSException {
-        Optional.ofNullable(tournament).orElseThrow(WrongNumberOfPlayersError::new);
+    public Play tournamentWinner(List<List<List<Play>>> tournament) throws RPSException {
+        if (!ofNullable(tournament).isPresent()) {
+            throw new WrongNumberOfPlayersError();
+        }
         tournamentIterator.createIterator(gameTemplate, tournament);
         while (tournamentIterator.hasNext()) {
             tournamentIterator.next();
