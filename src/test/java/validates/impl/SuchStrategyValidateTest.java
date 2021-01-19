@@ -18,7 +18,7 @@ public class SuchStrategyValidateTest {
         suchStrategyValidate.valid(Collections.singletonList(new Player("", null)));
     }
 
-    @Test
+    @Test(expected = Test.None.class)
     public void notShouldReturnErroIfEmpty() throws RPSException {
         suchStrategyValidate.valid(Collections.emptyList());
     }
@@ -28,7 +28,7 @@ public class SuchStrategyValidateTest {
         suchStrategyValidate.valid(null);
     }
 
-    @Test
+    @Test(expected = Test.None.class)
     public void notShouldReturnErroIfIsStrategy() throws RPSException {
         suchStrategyValidate.valid(Collections.singletonList(new Player("", StrategyType.P)));
     }

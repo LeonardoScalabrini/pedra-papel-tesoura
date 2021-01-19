@@ -34,7 +34,7 @@ public class NumberOfPlayersValidateTest {
         numberOfPlayersValidate.valid(Arrays.asList(new Player("", StrategyType.P)));
     }
 
-    @Test
+    @Test(expected = Test.None.class)
     public void notShouldReturnErrorIfPlayersIsTwo() throws RPSException {
         numberOfPlayersValidate.valid(Arrays.asList(new Player("", StrategyType.P), new Player("", StrategyType.P)));
     }

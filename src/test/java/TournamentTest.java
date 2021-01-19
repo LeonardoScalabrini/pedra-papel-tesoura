@@ -1,5 +1,3 @@
-package test.java;
-
 import main.java.Match;
 import main.java.Player;
 import main.java.Tournament;
