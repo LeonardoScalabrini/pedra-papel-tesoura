@@ -1,6 +1,5 @@
-package main.java;
+package main.java.strategys;
 
-import main.java.strategys.BeatsStrategy;
 import main.java.strategys.impl.PaperBeatsStrategy;
 import main.java.strategys.impl.RockBeatsStrategy;
 import main.java.strategys.impl.ScissorsBeatsStrategy;

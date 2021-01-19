@@ -8,24 +8,24 @@ import java.util.List;
 
 import static java.util.Optional.ofNullable;
 
-public class TournamentTemplate {
+public class Tournament {
 
-    private final GameTemplate gameTemplate;
+    private final Match match;
     private final TournamentIterator tournamentIterator;
 
-    public TournamentTemplate(GameTemplate gameTemplate, TournamentIterator tournamentIterator) {
-        this.gameTemplate = gameTemplate;
+    public Tournament(Match match, TournamentIterator tournamentIterator) {
+        this.match = match;
         this.tournamentIterator = tournamentIterator;
     }
 
-    public Play tournamentWinner(List<List<List<Play>>> tournament) throws RPSException {
+    public Player tournamentWinner(List<List<List<Player>>> tournament) throws RPSException {
         if (!ofNullable(tournament).isPresent()) {
             throw new WrongNumberOfPlayersError();
         }
-        tournamentIterator.createIterator(gameTemplate, tournament);
+        tournamentIterator.createIterator(match, tournament);
         while (tournamentIterator.hasNext()) {
             tournamentIterator.next();
         }
-        return tournamentIterator.previousPlay();
+        return tournamentIterator.winner();
     }
 }

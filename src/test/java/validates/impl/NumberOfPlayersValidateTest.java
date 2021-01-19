@@ -1,9 +1,9 @@
 package test.java.validates.impl;
 
-import main.java.Play;
-import main.java.StrategyType;
+import main.java.Player;
 import main.java.exceptions.RPSException;
 import main.java.exceptions.WrongNumberOfPlayersError;
+import main.java.strategys.StrategyType;
 import main.java.validates.impl.NumberOfPlayersValidate;
 import org.junit.Test;
 
@@ -26,16 +26,16 @@ public class NumberOfPlayersValidateTest {
 
     @Test(expected = WrongNumberOfPlayersError.class)
     public void shouldReturnErrorIfPlayersIsGreaterThanTwo() throws RPSException {
-        numberOfPlayersValidate.valid(Arrays.asList(new Play("", StrategyType.P), new Play("", StrategyType.P), new Play("", StrategyType.P)));
+        numberOfPlayersValidate.valid(Arrays.asList(new Player("", StrategyType.P), new Player("", StrategyType.P), new Player("", StrategyType.P)));
     }
 
     @Test(expected = WrongNumberOfPlayersError.class)
     public void shouldReturnErrorIfPlayersIsLessThanTwo() throws RPSException {
-        numberOfPlayersValidate.valid(Arrays.asList(new Play("", StrategyType.P)));
+        numberOfPlayersValidate.valid(Arrays.asList(new Player("", StrategyType.P)));
     }
 
     @Test
     public void notShouldReturnErrorIfPlayersIsTwo() throws RPSException {
-        numberOfPlayersValidate.valid(Arrays.asList(new Play("", StrategyType.P), new Play("", StrategyType.P)));
+        numberOfPlayersValidate.valid(Arrays.asList(new Player("", StrategyType.P), new Player("", StrategyType.P)));
     }
 }

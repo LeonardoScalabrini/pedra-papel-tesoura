@@ -1,14 +1,16 @@
 package main.java;
 
+import main.java.strategys.StrategyType;
+
 import java.util.Objects;
 
-public class Play {
+public class Player {
 
     public final String name;
 
     public final StrategyType strategy;
 
-    public Play(String name, StrategyType strategy) {
+    public Player(String name, StrategyType strategy) {
         this.name = name;
         this.strategy = strategy;
     }
@@ -22,8 +24,8 @@ public class Play {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Play play = (Play) o;
-        return Objects.equals(name, play.name) &&
-                Objects.equals(strategy, play.strategy);
+        Player player = (Player) o;
+        return Objects.equals(name, player.name) &&
+                Objects.equals(strategy, player.strategy);
     }
 }

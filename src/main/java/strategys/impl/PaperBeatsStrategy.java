@@ -1,7 +1,7 @@
 package main.java.strategys.impl;
 
-import main.java.StrategyType;
 import main.java.strategys.BeatsStrategy;
+import main.java.strategys.StrategyType;
 
 public class PaperBeatsStrategy implements BeatsStrategy {
     @Override

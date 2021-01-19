@@ -6,24 +6,24 @@ import main.java.validates.BaseValidate;
 
 import java.util.List;
 
-public class GameTemplate {
+public class Match {
 
     private static final int PLAYER_ONE = 0;
     private static final int PLAYER_TWO = 1;
     private final ChainOfValidationFactory chainOfValidationFactory;
 
-    public GameTemplate(ChainOfValidationFactory chainOfValidationFactory) {
+    public Match(ChainOfValidationFactory chainOfValidationFactory) {
         this.chainOfValidationFactory = chainOfValidationFactory;
     }
 
-    public Play gameWinner(List<Play> plays) throws RPSException {
+    public Player winner(List<Player> players) throws RPSException {
 
         BaseValidate baseValidate = chainOfValidationFactory.create();
 
-        baseValidate.valid(plays);
+        baseValidate.valid(players);
 
-        Play playerOne = plays.get(PLAYER_ONE);
-        Play playerTwo = plays.get(PLAYER_TWO);
+        Player playerOne = players.get(PLAYER_ONE);
+        Player playerTwo = players.get(PLAYER_TWO);
 
         if (playerOne.strategy.equals(playerTwo.strategy))
             return playerOne;

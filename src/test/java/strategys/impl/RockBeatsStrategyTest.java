@@ -1,6 +1,6 @@
 package test.java.strategys.impl;
 
-import main.java.StrategyType;
+import main.java.strategys.StrategyType;
 import main.java.strategys.impl.RockBeatsStrategy;
 import org.junit.Test;
 

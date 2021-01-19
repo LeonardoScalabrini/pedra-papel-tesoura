@@ -1,6 +1,6 @@
 package main.java.validates.impl;
 
-import main.java.Play;
+import main.java.Player;
 import main.java.exceptions.NoSuchStrategyError;
 import main.java.exceptions.RPSException;
 import main.java.validates.BaseValidate;
@@ -11,15 +11,15 @@ import static java.util.Optional.ofNullable;
 
 public class SuchStrategyValidate extends BaseValidate {
     @Override
-    public void valid(List<Play> plays) throws RPSException {
-        if (!ofNullable(plays).isPresent()) {
+    public void valid(List<Player> players) throws RPSException {
+        if (!ofNullable(players).isPresent()) {
             throw new NoSuchStrategyError();
         }
-        for (Play play : plays) {
-            if (!ofNullable(play.strategy).isPresent()) {
+        for (Player player : players) {
+            if (!ofNullable(player.strategy).isPresent()) {
                 throw new NoSuchStrategyError();
             }
         }
-        super.valid(plays);
+        super.valid(players);
     }
 }

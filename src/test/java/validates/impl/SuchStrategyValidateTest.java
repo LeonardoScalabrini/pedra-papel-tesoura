@@ -1,9 +1,9 @@
 package test.java.validates.impl;
 
-import main.java.Play;
-import main.java.StrategyType;
+import main.java.Player;
 import main.java.exceptions.NoSuchStrategyError;
 import main.java.exceptions.RPSException;
+import main.java.strategys.StrategyType;
 import main.java.validates.impl.SuchStrategyValidate;
 import org.junit.Test;
 
@@ -15,7 +15,7 @@ public class SuchStrategyValidateTest {
 
     @Test(expected = NoSuchStrategyError.class)
     public void shouldReturnErroIfNotIsStrategy() throws RPSException {
-        suchStrategyValidate.valid(Collections.singletonList(new Play("", null)));
+        suchStrategyValidate.valid(Collections.singletonList(new Player("", null)));
     }
 
     @Test
@@ -30,6 +30,6 @@ public class SuchStrategyValidateTest {
 
     @Test
     public void notShouldReturnErroIfIsStrategy() throws RPSException {
-        suchStrategyValidate.valid(Collections.singletonList(new Play("", StrategyType.P)));
+        suchStrategyValidate.valid(Collections.singletonList(new Player("", StrategyType.P)));
     }
 }
