@@ -5,10 +5,9 @@ import main.java.iterators.impl.TournamentIterator;
 
 public class TournamentFixture {
 
-    private TournamentFixture() {
-    }
+  private TournamentFixture() {}
 
-    public static Tournament of() {
-        return new Tournament(new TournamentIterator());
-    }
+  public static Tournament of() {
+    return new Tournament(new TournamentIterator());
+  }
 }

@@ -1,4 +1,3 @@
 package main.java.exceptions;
 
-public class RPSException extends Exception {
-}
+public class RPSException extends Exception {}

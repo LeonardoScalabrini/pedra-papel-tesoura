@@ -5,17 +5,16 @@ import main.java.strategys.StrategyType;
 
 public class PaperBeatsStrategy implements BeatsStrategy {
 
-    private static final PaperBeatsStrategy instance = new PaperBeatsStrategy();
+  private static final PaperBeatsStrategy instance = new PaperBeatsStrategy();
 
-    private PaperBeatsStrategy() {
-    }
+  private PaperBeatsStrategy() {}
 
-    public static PaperBeatsStrategy getInstance() {
-        return instance;
-    }
+  public static PaperBeatsStrategy getInstance() {
+    return instance;
+  }
 
-    @Override
-    public boolean beats(StrategyType strategyType) {
-        return StrategyType.R.equals(strategyType);
-    }
+  @Override
+  public boolean beats(StrategyType strategyType) {
+    return StrategyType.R.equals(strategyType);
+  }
 }

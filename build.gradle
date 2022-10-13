@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id "org.sonarqube" version "3.4.0.2513"
     id 'jacoco'
+    id 'com.github.sherter.google-java-format' version '0.9'
 }
 
 group 'org.pedra-papel-tesoura'
@@ -44,9 +45,11 @@ sonarqube {
     }
 }
 
-
 task installLocalGitHook(type: Copy){
     from new File(rootProject.rootDir, 'hooks/pre-commit')
+    into { new File(rootProject.rootDir, '.git/hooks')}
+    fileMode 0775
+    from new File(rootProject.rootDir, 'hooks/pre-push')
     into { new File(rootProject.rootDir, '.git/hooks')}
     fileMode 0775
 }
