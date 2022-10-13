@@ -11,11 +11,11 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Timeout(value = 1, unit = TimeUnit.MILLISECONDS)
-public class RockBeatsStrategyTest {
+class RockBeatsStrategyTest {
 
     @ParameterizedTest
     @MethodSource("fixtures.RockBeatsMethodSource#beats")
-    public void shouldBeats(RockBeatsStrategy rock, StrategyType strategyType, boolean expected) {
+    void shouldBeats(RockBeatsStrategy rock, StrategyType strategyType, boolean expected) {
         assertEquals(expected, rock.beats(strategyType));
     }
 }

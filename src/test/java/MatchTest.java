@@ -14,18 +14,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @Timeout(value = 100, unit = TimeUnit.MILLISECONDS)
-public class MatchTest {
+class MatchTest {
 
     @ParameterizedTest
     @MethodSource("fixtures.PlayerMethodSource#winner")
-    public void shouldReturnWinner(List<Player> players, Player winner) throws RPSException {
+    void shouldReturnWinner(List<Player> players, Player winner) throws RPSException {
         assertEquals(winner, Match.winner(players));
     }
 
     @ParameterizedTest
     @NullAndEmptySource
     @MethodSource("fixtures.PlayerMethodSource#wrongNumberOfPlayers")
-    public void shouldReturnWrongNumberOfPlayersError(List<Player> players) {
+    void shouldReturnWrongNumberOfPlayersError(List<Player> players) {
         assertThrows(WrongNumberOfPlayersError.class, () -> Match.winner(players));
     }
 }

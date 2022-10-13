@@ -13,19 +13,19 @@ import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TournamentTest {
+class TournamentTest {
     private final Tournament tournament = TournamentFixture.of();
 
     @ParameterizedTest
     @MethodSource("fixtures.PlayerMethodSource#tournament")
     @Timeout(value = 10, unit = TimeUnit.MILLISECONDS)
-    public void tournament(List<Player> players, Player winner) throws WrongNumberOfPlayersError {
+    void tournament(List<Player> players, Player winner) throws WrongNumberOfPlayersError {
         assertEquals(winner, tournament.tournamentWinner(players));
     }
 
     @ParameterizedTest
     @MethodSource("fixtures.PlayerMethodSource#massive")
-    public void massive(int timeOut, List<Player> players) {
+    void massive(int timeOut, List<Player> players) {
         assertTimeout(Duration.ofMillis(timeOut), () -> tournament.tournamentWinner(players));
     }
 

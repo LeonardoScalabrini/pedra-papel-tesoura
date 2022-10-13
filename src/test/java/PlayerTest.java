@@ -14,17 +14,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @Timeout(value = 10, unit = TimeUnit.MILLISECONDS)
-public class PlayerTest {
+class PlayerTest {
 
     @ParameterizedTest
     @MethodSource("fixtures.PlayerMethodSource#equals")
-    public void equals(Player one, Player two, boolean expected) {
+    void equals(Player one, Player two, boolean expected) {
         assertEquals(expected, one.equals(two));
         assertEquals(expected, one.hashCode() == two.hashCode());
     }
 
     @Test
-    public void shouldThrowWithNullStrategy() {
+    void shouldThrowWithNullStrategy() {
         assertThrows(NoSuchStrategyError.class, () -> PlayerFixture.of("name", null));
     }
 
