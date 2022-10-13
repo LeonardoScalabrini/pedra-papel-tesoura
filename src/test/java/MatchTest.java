@@ -13,12 +13,11 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@Timeout(value = 1, unit = TimeUnit.MILLISECONDS)
+@Timeout(value = 100, unit = TimeUnit.MILLISECONDS)
 public class MatchTest {
 
     @ParameterizedTest
     @MethodSource("fixtures.PlayerMethodSource#winner")
-    @Timeout(value = 100, unit = TimeUnit.MILLISECONDS)
     public void shouldReturnWinner(List<Player> players, Player winner) throws RPSException {
         assertEquals(winner, Match.winner(players));
     }
@@ -26,7 +25,6 @@ public class MatchTest {
     @ParameterizedTest
     @NullAndEmptySource
     @MethodSource("fixtures.PlayerMethodSource#wrongNumberOfPlayers")
-    @Timeout(value = 5, unit = TimeUnit.MILLISECONDS)
     public void shouldReturnWrongNumberOfPlayersError(List<Player> players) {
         assertThrows(WrongNumberOfPlayersError.class, () -> Match.winner(players));
     }

@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@Timeout(value = 1, unit = TimeUnit.MILLISECONDS)
+@Timeout(value = 10, unit = TimeUnit.MILLISECONDS)
 public class PlayerTest {
 
     @ParameterizedTest
