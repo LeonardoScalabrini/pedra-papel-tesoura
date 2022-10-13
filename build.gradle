@@ -46,6 +46,20 @@ sonarqube {
     }
 }
 
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                counter = 'LINE'
+                value = 'COVEREDRATIO'
+                minimum = 0.9
+            }
+        }
+    }
+}
+
+check.dependsOn jacocoTestCoverageVerification
+
 task installLocalGitHook(type: Copy){
     from new File(rootProject.rootDir, 'hooks/pre-commit')
     into { new File(rootProject.rootDir, '.git/hooks')}
