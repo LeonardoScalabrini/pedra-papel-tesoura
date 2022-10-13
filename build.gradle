@@ -3,6 +3,7 @@ plugins {
     id "org.sonarqube" version "3.4.0.2513"
     id 'jacoco'
     id 'com.github.sherter.google-java-format' version '0.9'
+    id "nebula.lint" version "17.7.0"
 }
 
 group 'org.pedra-papel-tesoura'

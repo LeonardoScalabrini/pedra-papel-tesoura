@@ -1,15 +1,19 @@
 #!/bin/sh
 
-echo "*****Running format code******"
+echo "*****Running check code******"
 
 git stash -q --keep-index
 
 ./gradlew goJF
+./gradlew lintGradle
+./gradlew fixGradleLint
+./gradlew generateGradleLintReport
+
 
 status=$?
 
 git stash pop -q
 
-echo "*****Done with format code******"
+echo "*****Done with check code******"
 
 exit $status
