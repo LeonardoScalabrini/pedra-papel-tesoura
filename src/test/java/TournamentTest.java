@@ -32,7 +32,7 @@ class TournamentTest {
     @ParameterizedTest
     @NullAndEmptySource
     @Timeout(value = 10, unit = TimeUnit.MILLISECONDS)
-    public void shouldReturnErrorIfPlayersIsNull(List<Player> playerList) {
+    void shouldReturnErrorIfPlayersIsNull(List<Player> playerList) {
         assertThrows(WrongNumberOfPlayersError.class, () -> tournament.tournamentWinner(playerList));
     }
 }

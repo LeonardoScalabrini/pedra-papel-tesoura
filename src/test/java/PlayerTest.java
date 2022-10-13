@@ -30,7 +30,7 @@ class PlayerTest {
 
     @ParameterizedTest
     @NullAndEmptySource
-    public void shouldThrowWithNullName(String name) {
+    void shouldThrowWithNullName(String name) {
         assertThrows(NullPointerException.class, () -> PlayerFixture.of(name, StrategyType.S));
     }
 }
