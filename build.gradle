@@ -40,6 +40,6 @@ sonarqube {
         property "sonar.organization", "leonardoscalabrini"
         property "sonar.host.url", "https://sonarcloud.io"
         property "sonar.sources","src/main/java/"
-        property "sonar.tests", "src/tests/"
+        property "sonar.tests", "src/test/"
     }
 }
