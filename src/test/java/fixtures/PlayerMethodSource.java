@@ -78,9 +78,9 @@ public class PlayerMethodSource {
 
     private static Stream<Arguments> massive() {
         return Stream.of(
-                arguments(1, of(10)),
-                arguments(1, of(100)),
-                arguments(1, of(1000)),
-                arguments(10, of(10000)));
+                arguments(10, of(10)),
+                arguments(10, of(100)),
+                arguments(10, of(1000)),
+                arguments(100, of(10000)));
     }
 }
