@@ -5,7 +5,7 @@ import main.java.strategys.impl.RockBeatsStrategy;
 import main.java.strategys.impl.ScissorsBeatsStrategy;
 
 public enum StrategyType {
-    R(new RockBeatsStrategy()), P(new PaperBeatsStrategy()), S(new ScissorsBeatsStrategy());
+    R(RockBeatsStrategy.getInstance()), P(PaperBeatsStrategy.getInstance()), S(ScissorsBeatsStrategy.getInstance());
 
     private final BeatsStrategy beatsStrategy;
 

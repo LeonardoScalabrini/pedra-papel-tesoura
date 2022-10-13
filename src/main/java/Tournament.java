@@ -1,31 +1,25 @@
 package main.java;
 
-import main.java.exceptions.RPSException;
 import main.java.exceptions.WrongNumberOfPlayersError;
 import main.java.iterators.impl.TournamentIterator;
 
 import java.util.List;
 
-import static java.util.Optional.ofNullable;
-
 public class Tournament {
-
-    private final Match match;
     private final TournamentIterator tournamentIterator;
 
-    public Tournament(Match match, TournamentIterator tournamentIterator) {
-        this.match = match;
+    public Tournament(TournamentIterator tournamentIterator) {
         this.tournamentIterator = tournamentIterator;
     }
 
-    public Player tournamentWinner(List<List<List<Player>>> tournament) throws RPSException {
-        if (!ofNullable(tournament).isPresent()) {
+    public Player tournamentWinner(List<Player> players) throws WrongNumberOfPlayersError {
+        if (players == null || players.isEmpty()) {
             throw new WrongNumberOfPlayersError();
         }
-        tournamentIterator.createIterator(match, tournament);
+        tournamentIterator.createIterator(players);
         while (tournamentIterator.hasNext()) {
             tournamentIterator.next();
         }
-        return tournamentIterator.winner();
+        return tournamentIterator.winner().orElseThrow();
     }
 }

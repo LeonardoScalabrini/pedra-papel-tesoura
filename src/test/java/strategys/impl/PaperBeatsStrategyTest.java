@@ -1,33 +1,21 @@
-package test.java.strategys.impl;
+package strategys.impl;
 
 import main.java.strategys.StrategyType;
 import main.java.strategys.impl.PaperBeatsStrategy;
-import org.junit.Test;
+import org.junit.jupiter.api.Timeout;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import java.util.concurrent.TimeUnit;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+@Timeout(value = 1, unit = TimeUnit.MILLISECONDS)
 public class PaperBeatsStrategyTest {
 
-    private PaperBeatsStrategy beatsStrategy = new PaperBeatsStrategy();
-
-    @Test
-    public void shouldBeats() {
-        assertTrue(beatsStrategy.beats(StrategyType.R));
-    }
-
-    @Test
-    public void notShouldBeatsIfS() {
-        assertFalse(beatsStrategy.beats(StrategyType.S));
-    }
-
-    @Test
-    public void notShouldBeatsIfP() {
-        assertFalse(beatsStrategy.beats(StrategyType.P));
-    }
-
-    @Test
-    public void notShouldBeatsIfNull() {
-        assertFalse(beatsStrategy.beats(null));
+    @ParameterizedTest
+    @MethodSource("fixtures.PaperBeatsMethodSource#beats")
+    public void shouldBeats(PaperBeatsStrategy paper, StrategyType strategyType, boolean expected) {
+        assertEquals(expected, paper.beats(strategyType));
     }
 }

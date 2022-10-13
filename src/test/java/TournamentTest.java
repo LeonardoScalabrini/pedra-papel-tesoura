@@ -1,97 +1,38 @@
-import main.java.Match;
+import fixtures.TournamentFixture;
 import main.java.Player;
 import main.java.Tournament;
-import main.java.exceptions.RPSException;
 import main.java.exceptions.WrongNumberOfPlayersError;
-import main.java.factorys.ChainOfValidationFactory;
-import main.java.iterators.impl.TournamentIterator;
-import main.java.strategys.StrategyType;
-import org.junit.Test;
+import org.junit.jupiter.api.Timeout;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.time.Duration;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TournamentTest {
+    private final Tournament tournament = TournamentFixture.of();
 
-    private static final String ARMANDO = "Armando";
-    private static final String RICHARD = "Richard";
-    private static final String MICHAEL = "Michael";
-    private static final String ALLEN = "Allen";
-    private static final String DAVID_E = "David E.";
-    private static final String RICHARD_X = "Richard X.";
-    private Tournament tournament = new Tournament(new Match(new ChainOfValidationFactory()), new TournamentIterator());
-
-    @Test
-    public void shouldWinnerTournament() throws RPSException {
-        List<List<List<Player>>> groups = new ArrayList<>();
-        List<List<Player>> groupA = new ArrayList<>();
-        groupA.add(Arrays.asList(new Player(ARMANDO, StrategyType.P), new Player("Dave", StrategyType.S)));
-        groupA.add(Arrays.asList(new Player(RICHARD, StrategyType.R), new Player(MICHAEL, StrategyType.S)));
-
-        List<List<Player>> groupB = new ArrayList<>();
-        groupB.add(Arrays.asList(new Player(ALLEN, StrategyType.S), new Player("Omer", StrategyType.P)));
-        groupB.add(Arrays.asList(new Player(DAVID_E, StrategyType.R), new Player(RICHARD_X, StrategyType.P)));
-
-        groups.add(groupA);
-        groups.add(groupB);
-
-        assertEquals(new Player(RICHARD, StrategyType.R), this.tournament.tournamentWinner(groups));
+    @ParameterizedTest
+    @MethodSource("fixtures.PlayerMethodSource#tournament")
+    @Timeout(value = 1, unit = TimeUnit.MILLISECONDS)
+    public void tournament(List<Player> players, Player winner) throws WrongNumberOfPlayersError {
+        assertEquals(winner, tournament.tournamentWinner(players));
     }
 
-    @Test
-    public void shouldWinnerTournamentWith1Group() throws RPSException {
-        List<List<List<Player>>> groups = new ArrayList<>();
-        List<List<Player>> groupA = new ArrayList<>();
-        groupA.add(Arrays.asList(new Player(ARMANDO, StrategyType.P), new Player("Dave", StrategyType.S)));
-        groupA.add(Arrays.asList(new Player(RICHARD, StrategyType.R), new Player(MICHAEL, StrategyType.S)));
-
-        groups.add(groupA);
-
-        assertEquals(new Player(RICHARD, StrategyType.R), this.tournament.tournamentWinner(groups));
+    @ParameterizedTest
+    @MethodSource("fixtures.PlayerMethodSource#massive")
+    public void massive(int timeOut, List<Player> players) {
+        assertTimeout(Duration.ofMillis(timeOut), () -> tournament.tournamentWinner(players));
     }
 
-    @Test
-    public void shouldWinnerTournamentWith3Groups() throws RPSException {
-        List<List<List<Player>>> groups = new ArrayList<>();
-        List<List<Player>> groupA = new ArrayList<>();
-        groupA.add(Arrays.asList(new Player(ARMANDO, StrategyType.P), new Player("Dave", StrategyType.S)));
-        groupA.add(Arrays.asList(new Player(RICHARD, StrategyType.R), new Player(MICHAEL, StrategyType.S)));
-
-        List<List<Player>> groupB = new ArrayList<>();
-        groupB.add(Arrays.asList(new Player(ALLEN, StrategyType.S), new Player("Omer", StrategyType.P)));
-        groupB.add(Arrays.asList(new Player(DAVID_E, StrategyType.R), new Player(RICHARD_X, StrategyType.P)));
-
-        groups.add(groupA);
-        groups.add(groupB);
-        groups.add(groupA);
-
-        assertEquals(new Player(RICHARD, StrategyType.R), this.tournament.tournamentWinner(groups));
-    }
-
-    @Test
-    public void shouldWinnerTournamentWith4Groups() throws RPSException {
-        List<List<List<Player>>> groups = new ArrayList<>();
-        List<List<Player>> groupA = new ArrayList<>();
-        groupA.add(Arrays.asList(new Player(ARMANDO, StrategyType.P), new Player("Dave", StrategyType.S)));
-        groupA.add(Arrays.asList(new Player(RICHARD, StrategyType.R), new Player(MICHAEL, StrategyType.S)));
-
-        List<List<Player>> groupB = new ArrayList<>();
-        groupB.add(Arrays.asList(new Player(ALLEN, StrategyType.S), new Player("Omer", StrategyType.P)));
-        groupB.add(Arrays.asList(new Player(DAVID_E, StrategyType.R), new Player(RICHARD_X, StrategyType.P)));
-
-        groups.add(groupA);
-        groups.add(groupB);
-        groups.add(groupA);
-        groups.add(groupB);
-
-        assertEquals(new Player(RICHARD, StrategyType.R), this.tournament.tournamentWinner(groups));
-    }
-
-    @Test(expected = WrongNumberOfPlayersError.class)
-    public void shouldReturnErrorIfPlayersIsNull() throws RPSException {
-        tournament.tournamentWinner(null);
+    @ParameterizedTest
+    @NullAndEmptySource
+    @Timeout(value = 1, unit = TimeUnit.MILLISECONDS)
+    public void shouldReturnErrorIfPlayersIsNull(List<Player> playerList) {
+        assertThrows(WrongNumberOfPlayersError.class, () -> tournament.tournamentWinner(playerList));
     }
 }

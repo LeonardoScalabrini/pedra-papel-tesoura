@@ -1,33 +1,21 @@
-package test.java.strategys.impl;
+package strategys.impl;
 
 import main.java.strategys.StrategyType;
 import main.java.strategys.impl.RockBeatsStrategy;
-import org.junit.Test;
+import org.junit.jupiter.api.Timeout;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import java.util.concurrent.TimeUnit;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+@Timeout(value = 1, unit = TimeUnit.MILLISECONDS)
 public class RockBeatsStrategyTest {
 
-    private RockBeatsStrategy beatsStrategy = new RockBeatsStrategy();
-
-    @Test
-    public void shouldBeats() {
-        assertTrue(beatsStrategy.beats(StrategyType.S));
-    }
-
-    @Test
-    public void notShouldBeatsIfR() {
-        assertFalse(beatsStrategy.beats(StrategyType.R));
-    }
-
-    @Test
-    public void notShouldBeatsIfP() {
-        assertFalse(beatsStrategy.beats(StrategyType.P));
-    }
-
-    @Test
-    public void notShouldBeatsIfNull() {
-        assertFalse(beatsStrategy.beats(null));
+    @ParameterizedTest
+    @MethodSource("fixtures.RockBeatsMethodSource#beats")
+    public void shouldBeats(RockBeatsStrategy rock, StrategyType strategyType, boolean expected) {
+        assertEquals(expected, rock.beats(strategyType));
     }
 }

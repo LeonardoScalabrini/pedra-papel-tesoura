@@ -1,8 +1,6 @@
 package main.java;
 
-import main.java.exceptions.RPSException;
-import main.java.factorys.ChainOfValidationFactory;
-import main.java.validates.BaseValidate;
+import main.java.exceptions.WrongNumberOfPlayersError;
 
 import java.util.List;
 
@@ -10,27 +8,22 @@ public class Match {
 
     private static final int PLAYER_ONE = 0;
     private static final int PLAYER_TWO = 1;
-    private final ChainOfValidationFactory chainOfValidationFactory;
+    private static final int NUMBER_OF_PLAYERS = 2;
 
-    public Match(ChainOfValidationFactory chainOfValidationFactory) {
-        this.chainOfValidationFactory = chainOfValidationFactory;
+    private Match() {
     }
 
-    public Player winner(List<Player> players) throws RPSException {
+    public static Player winner(List<Player> players) throws WrongNumberOfPlayersError {
 
-        BaseValidate baseValidate = chainOfValidationFactory.create();
-
-        baseValidate.valid(players);
+        if (players == null || players.size() != NUMBER_OF_PLAYERS)
+            throw new WrongNumberOfPlayersError();
 
         Player playerOne = players.get(PLAYER_ONE);
         Player playerTwo = players.get(PLAYER_TWO);
 
-        if (playerOne.strategy.equals(playerTwo.strategy))
-            return playerOne;
+        if (playerTwo.strategy.beats(playerOne.strategy))
+            return playerTwo;
 
-        if (playerOne.strategy.beats(playerTwo.strategy))
-            return playerOne;
-
-        return playerTwo;
+        return playerOne;
     }
 }

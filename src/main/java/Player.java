@@ -1,5 +1,6 @@
 package main.java;
 
+import main.java.exceptions.NoSuchStrategyError;
 import main.java.strategys.StrategyType;
 
 import java.util.Objects;
@@ -10,7 +11,15 @@ public class Player {
 
     public final StrategyType strategy;
 
-    public Player(String name, StrategyType strategy) {
+    public Player(String name, StrategyType strategy) throws NoSuchStrategyError {
+        Objects.requireNonNull(name);
+
+        if (name.isBlank())
+            throw new NullPointerException();
+
+        if (Objects.isNull(strategy)) {
+            throw new NoSuchStrategyError();
+        }
         this.name = name;
         this.strategy = strategy;
     }
@@ -25,7 +34,6 @@ public class Player {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Player player = (Player) o;
-        return Objects.equals(name, player.name) &&
-                Objects.equals(strategy, player.strategy);
+        return name.equals(player.name) && strategy.equals(player.strategy);
     }
 }

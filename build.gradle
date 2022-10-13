@@ -15,6 +15,13 @@ sourceSets {
         }
     }
 }
+
+test {
+    useJUnitPlatform()
+}
+
 dependencies {
-    compile 'junit:junit:4.12'
+    implementation group: 'org.junit.jupiter', name: 'junit-jupiter', version: '5.9.1'
+    implementation 'br.com.six2six:fixture-factory:3.1.0'
+
 }

@@ -1,65 +1,36 @@
+import fixtures.PlayerFixture;
 import main.java.Player;
+import main.java.exceptions.NoSuchStrategyError;
 import main.java.strategys.StrategyType;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import java.util.concurrent.TimeUnit;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+@Timeout(value = 1, unit = TimeUnit.MILLISECONDS)
 public class PlayerTest {
 
-    @Test
-    public void shouldEquals() {
-        Player one = new Player("name", StrategyType.S);
-        Player two = new Player("name", StrategyType.S);
-        assertEquals(one, two);
+    @ParameterizedTest
+    @MethodSource("fixtures.PlayerMethodSource#equals")
+    public void equals(Player one, Player two, boolean expected) {
+        assertEquals(expected, one.equals(two));
+        assertEquals(expected, one.hashCode() == two.hashCode());
     }
 
     @Test
-    public void notShouldEqualsWithDiffName() {
-        Player one = new Player("name", StrategyType.S);
-        Player two = new Player("diff", StrategyType.S);
-        assertNotEquals(one, two);
+    public void shouldThrowWithNullStrategy() {
+        assertThrows(NoSuchStrategyError.class, () -> PlayerFixture.of("name", null));
     }
 
-    @Test
-    public void notShouldEqualsWithDiffStategy() {
-        Player one = new Player("name", StrategyType.S);
-        Player two = new Player("name", StrategyType.P);
-        assertNotEquals(one, two);
-    }
-
-    @Test
-    public void notShouldEqualsWithDiffNameAndStategy() {
-        Player one = new Player("name", StrategyType.S);
-        Player two = new Player("diff", StrategyType.P);
-        assertNotEquals(one, two);
-    }
-
-    @Test
-    public void notShouldEqualsWithNullName() {
-        Player one = new Player("name", StrategyType.S);
-        Player two = new Player(null, StrategyType.S);
-        assertNotEquals(one, two);
-    }
-
-    @Test
-    public void notShouldEqualsWithNullStategy() {
-        Player one = new Player("name", StrategyType.S);
-        Player two = new Player("name", null);
-        assertNotEquals(one, two);
-    }
-
-    @Test
-    public void notShouldEqualsWithNullNameAndStategy() {
-        Player one = new Player("name", StrategyType.S);
-        Player two = new Player(null, null);
-        assertNotEquals(one, two);
-    }
-
-    @Test
-    public void shouldHash() {
-        Player one = new Player("name", StrategyType.S);
-        Player two = new Player("name", StrategyType.S);
-        assertEquals(one.hashCode(), two.hashCode());
+    @ParameterizedTest
+    @NullAndEmptySource
+    public void shouldThrowWithNullName(String name) {
+        assertThrows(NullPointerException.class, () -> PlayerFixture.of(name, StrategyType.S));
     }
 }
