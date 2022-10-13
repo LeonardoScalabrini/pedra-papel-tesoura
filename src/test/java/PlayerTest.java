@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.NullSource;
 
 import java.util.concurrent.TimeUnit;
 
@@ -20,7 +21,7 @@ class PlayerTest {
     @MethodSource("fixtures.PlayerMethodSource#equals")
     void equals(Player one, Player two, boolean expected) {
         assertEquals(expected, one.equals(two));
-        assertEquals(expected, one.hashCode() == two.hashCode());
+        assertEquals(expected, two != null && one.hashCode() == two.hashCode());
     }
 
     @Test

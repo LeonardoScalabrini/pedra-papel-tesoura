@@ -31,6 +31,7 @@ public class PlayerMethodSource {
     private static Stream<Arguments> equals() {
         try {
             return Stream.of(
+                    arguments(of("name", StrategyType.S), null, false),
                     arguments(of("name", StrategyType.S), of("diff", StrategyType.S), false),
                     arguments(of("name", StrategyType.R), of("name", StrategyType.S), false),
                     arguments(of("name", StrategyType.S), of("name", StrategyType.S), true));
