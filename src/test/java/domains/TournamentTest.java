@@ -17,7 +17,7 @@ class TournamentTest {
 
   @ParameterizedTest
   @MethodSource("fixtures.PlayerMethodSource#tournament")
-  @Timeout(value = 10, unit = TimeUnit.MILLISECONDS)
+  @Timeout(value = 100, unit = TimeUnit.MILLISECONDS)
   void tournament(List<Player> players, Player winner) throws WrongNumberOfPlayersError {
     assertEquals(winner, tournament.tournamentWinner(players));
   }

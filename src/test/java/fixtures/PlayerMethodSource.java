@@ -13,9 +13,9 @@ import strategys.StrategyType;
 
 public class PlayerMethodSource {
 
-  private static final Player scissorsPlayer;
-  private static final Player rockPlayer;
-  private static final Player paperPlayer;
+  public static final Player scissorsPlayer;
+  public static final Player rockPlayer;
+  public static final Player paperPlayer;
 
   static {
     try {
@@ -40,58 +40,46 @@ public class PlayerMethodSource {
   }
 
   private static Stream<Arguments> winner() {
-    try {
-      return Stream.of(
-          arguments(asList(rockPlayer, scissorsPlayer), rockPlayer),
-          arguments(asList(scissorsPlayer, paperPlayer), scissorsPlayer),
-          arguments(asList(paperPlayer, rockPlayer), paperPlayer),
-          arguments(asList(paperPlayer, scissorsPlayer), scissorsPlayer),
-          arguments(asList(scissorsPlayer, scissorsPlayer), scissorsPlayer));
-    } catch (Exception e) {
-      return Stream.empty();
-    }
+    return Stream.of(
+        arguments(asList(rockPlayer, scissorsPlayer), rockPlayer),
+        arguments(asList(scissorsPlayer, paperPlayer), scissorsPlayer),
+        arguments(asList(paperPlayer, rockPlayer), paperPlayer),
+        arguments(asList(paperPlayer, scissorsPlayer), scissorsPlayer),
+        arguments(asList(scissorsPlayer, scissorsPlayer), scissorsPlayer));
   }
 
   private static Stream<Arguments> wrongNumberOfPlayers() {
-    try {
       return Stream.of(
           arguments(Collections.singletonList(of())), arguments(asList(of(), of(), of())));
-    } catch (Exception e) {
-      return Stream.empty();
-    }
   }
 
   private static Stream<Arguments> tournament() {
-    try {
-      return Stream.of(
-          arguments(asList(rockPlayer, scissorsPlayer), rockPlayer),
-          arguments(asList(scissorsPlayer, paperPlayer, paperPlayer), scissorsPlayer),
-          arguments(asList(paperPlayer, rockPlayer, rockPlayer, rockPlayer), paperPlayer),
-          arguments(
-              asList(rockPlayer, scissorsPlayer, paperPlayer, scissorsPlayer, scissorsPlayer),
-              rockPlayer),
-          arguments(
-              asList(
-                  scissorsPlayer,
-                  paperPlayer,
-                  rockPlayer,
-                  paperPlayer,
-                  paperPlayer,
-                  scissorsPlayer),
-              scissorsPlayer),
-          arguments(
-              asList(
-                  paperPlayer,
-                  rockPlayer,
-                  rockPlayer,
-                  scissorsPlayer,
-                  rockPlayer,
-                  scissorsPlayer,
-                  rockPlayer),
-              paperPlayer));
-    } catch (Exception e) {
-      return Stream.empty();
-    }
+    return Stream.of(
+        arguments(asList(rockPlayer, scissorsPlayer), rockPlayer),
+        arguments(asList(scissorsPlayer, paperPlayer, paperPlayer), scissorsPlayer),
+        arguments(asList(paperPlayer, rockPlayer, rockPlayer, rockPlayer), paperPlayer),
+        arguments(
+            asList(rockPlayer, scissorsPlayer, paperPlayer, scissorsPlayer, scissorsPlayer),
+            rockPlayer),
+        arguments(
+            asList(
+                scissorsPlayer,
+                paperPlayer,
+                rockPlayer,
+                paperPlayer,
+                paperPlayer,
+                scissorsPlayer),
+            scissorsPlayer),
+        arguments(
+            asList(
+                paperPlayer,
+                rockPlayer,
+                rockPlayer,
+                scissorsPlayer,
+                rockPlayer,
+                scissorsPlayer,
+                rockPlayer),
+            paperPlayer));
   }
 
   private static Stream<Arguments> massive() {
