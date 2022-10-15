@@ -8,7 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import strategys.StrategyType;
 
-@Timeout(value = 1, unit = TimeUnit.MILLISECONDS)
+@Timeout(value = 10, unit = TimeUnit.MILLISECONDS)
 class PaperBeatsStrategyTest {
 
   @ParameterizedTest
