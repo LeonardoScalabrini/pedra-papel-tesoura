@@ -16,8 +16,7 @@ public class TournamentIterator implements IterableTournament {
   @Override
   public void createIterator(List<Player> players) {
     Objects.requireNonNull(players);
-    if (players.isEmpty())
-      return;
+    if (players.isEmpty()) return;
 
     this.totalIterations = calculeTotalIterations(players);
     this.players = players;
@@ -49,13 +48,12 @@ public class TournamentIterator implements IterableTournament {
     return players.stream().findFirst();
   }
 
-  private int calculeTotalIterations(List<Player> players){
+  private int calculeTotalIterations(List<Player> players) {
     var total = players.size();
     var result = total / GROUP_NUMBER_PLAYERS;
     var remainder = total % GROUP_NUMBER_PLAYERS;
 
-    if (remainder > 0)
-      result++;
+    if (remainder > 0) result++;
 
     return result;
   }

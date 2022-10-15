@@ -49,8 +49,8 @@ public class PlayerMethodSource {
   }
 
   private static Stream<Arguments> wrongNumberOfPlayers() {
-      return Stream.of(
-          arguments(Collections.singletonList(of())), arguments(asList(of(), of(), of())));
+    return Stream.of(
+        arguments(Collections.singletonList(of())), arguments(asList(of(), of(), of())));
   }
 
   private static Stream<Arguments> tournament() {
@@ -63,12 +63,7 @@ public class PlayerMethodSource {
             rockPlayer),
         arguments(
             asList(
-                scissorsPlayer,
-                paperPlayer,
-                rockPlayer,
-                paperPlayer,
-                paperPlayer,
-                scissorsPlayer),
+                scissorsPlayer, paperPlayer, rockPlayer, paperPlayer, paperPlayer, scissorsPlayer),
             scissorsPlayer),
         arguments(
             asList(
