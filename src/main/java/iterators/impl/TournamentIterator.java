@@ -13,6 +13,8 @@ public class TournamentIterator implements IterableTournament {
   private int iterations = 0;
   private List<Player> players = Collections.emptyList();
 
+  private Player lastWinner;
+
   @Override
   public void createIterator(List<Player> players) {
     Objects.requireNonNull(players);

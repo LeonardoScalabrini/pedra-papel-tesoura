@@ -3,6 +3,7 @@ package domains;
 import exceptions.WrongNumberOfPlayersError;
 import iterators.impl.TournamentIterator;
 import java.util.List;
+import java.util.Objects;
 
 public class Tournament {
   private final TournamentIterator tournamentIterator;
@@ -12,9 +13,8 @@ public class Tournament {
   }
 
   public Player tournamentWinner(List<Player> players) throws WrongNumberOfPlayersError {
-    if (players == null || players.isEmpty()) {
-      throw new WrongNumberOfPlayersError();
-    }
+    Objects.requireNonNull(players);
+
     tournamentIterator.createIterator(players);
     while (tournamentIterator.hasNext()) {
       tournamentIterator.next();

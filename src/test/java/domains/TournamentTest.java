@@ -32,6 +32,6 @@ class TournamentTest {
   @NullAndEmptySource
   @Timeout(value = 10, unit = TimeUnit.MILLISECONDS)
   void shouldReturnErrorIfPlayersIsNull(List<Player> playerList) {
-    assertThrows(WrongNumberOfPlayersError.class, () -> tournament.tournamentWinner(playerList));
+    assertThrows(Exception.class, () -> tournament.tournamentWinner(playerList));
   }
 }
