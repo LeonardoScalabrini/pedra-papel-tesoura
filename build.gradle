@@ -4,6 +4,7 @@ plugins {
     id 'jacoco'
     id 'com.github.sherter.google-java-format' version '0.9'
     id "nebula.lint" version "17.7.0"
+    id 'info.solidsoft.pitest' version '1.9.0'
 }
 
 group 'org.pedra-papel-tesoura'
@@ -13,13 +14,14 @@ repositories {
     mavenCentral()
 }
 
-sourceSets {
-    main {
-        java {
-            srcDirs = ['src']
-        }
-    }
+dependencies {
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter', version: '5.9.1'
+    testImplementation 'br.com.six2six:fixture-factory:3.1.0'
+    testImplementation 'info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.9.0'
+    testImplementation "org.pitest:pitest-junit5-plugin:1.1.0"
 }
+
+apply plugin: 'info.solidsoft.pitest'
 
 test {
     useJUnitPlatform()
@@ -29,11 +31,6 @@ jacocoTestReport {
     reports {
         xml.enabled true
     }
-}
-
-dependencies {
-    implementation group: 'org.junit.jupiter', name: 'junit-jupiter', version: '5.9.1'
-    implementation 'br.com.six2six:fixture-factory:3.1.0'
 }
 
 sonarqube {
@@ -58,8 +55,6 @@ jacocoTestCoverageVerification {
     }
 }
 
-check.dependsOn jacocoTestCoverageVerification
-
 task installLocalGitHook(type: Copy){
     from new File(rootProject.rootDir, 'hooks/pre-commit')
     into { new File(rootProject.rootDir, '.git/hooks')}
@@ -69,6 +64,18 @@ task installLocalGitHook(type: Copy){
     fileMode 0775
 }
 
+pitest {
+    junit5PluginVersion = '1.1.0'
+    targetClasses = ['main.java.*']//by default "${project.group}.*"
+    targetTests = ['test.java.*']
+    testSourceSets = [sourceSets.test]
+    mainSourceSets = [sourceSets.main]
+    pitestVersion = '1.9.0' //not needed when a default PIT version should be used
+    threads = 4
+    outputFormats = ['XML', 'HTML']
+    timestampedReports = false
+}
+
+check.dependsOn jacocoTestCoverageVerification
 build.dependsOn installLocalGitHook
-
-
+build.dependsOn 'pitest'
