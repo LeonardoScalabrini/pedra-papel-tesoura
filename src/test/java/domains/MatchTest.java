@@ -1,8 +1,8 @@
+package domains;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import domains.Match;
-import domains.Player;
 import exceptions.RPSException;
 import exceptions.WrongNumberOfPlayersError;
 import java.util.List;

@@ -5,6 +5,7 @@ echo "*****Running check tests******"
 git stash -q --keep-index
 
 ./gradlew test
+./gradlew pitest
 ./gradlew check
 
 status=$?

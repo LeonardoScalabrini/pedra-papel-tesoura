@@ -39,7 +39,7 @@ sonarqube {
         property "sonar.organization", "leonardoscalabrini"
         property "sonar.host.url", "https://sonarcloud.io"
         property "sonar.sources","src/main/java/"
-        property "sonar.tests", "src/test/"
+        property "sonar.tests", "src/test/java"
     }
 }
 
@@ -66,11 +66,10 @@ task installLocalGitHook(type: Copy){
 
 pitest {
     junit5PluginVersion = '1.1.0'
-    targetClasses = ['main.java.*']//by default "${project.group}.*"
-    targetTests = ['test.java.*']
+    targetClasses = ['domains.*','exceptions.*','iterators.*','strategys.*']
     testSourceSets = [sourceSets.test]
     mainSourceSets = [sourceSets.main]
-    pitestVersion = '1.9.0' //not needed when a default PIT version should be used
+    pitestVersion = '1.9.0'
     threads = 4
     outputFormats = ['XML', 'HTML']
     timestampedReports = false

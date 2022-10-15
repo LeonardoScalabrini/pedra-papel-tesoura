@@ -1,7 +1,8 @@
+package domains;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import domains.Player;
 import exceptions.NoSuchStrategyError;
 import fixtures.PlayerFixture;
 import java.util.concurrent.TimeUnit;

@@ -1,7 +1,7 @@
+package domains;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-import domains.Player;
-import domains.Tournament;
 import exceptions.WrongNumberOfPlayersError;
 import fixtures.TournamentFixture;
 import java.time.Duration;
