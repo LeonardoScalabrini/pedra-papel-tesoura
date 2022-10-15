@@ -1,17 +1,16 @@
-import fixtures.TournamentFixture;
+import static org.junit.jupiter.api.Assertions.*;
+
 import domains.Player;
 import domains.Tournament;
 import exceptions.WrongNumberOfPlayersError;
+import fixtures.TournamentFixture;
+import java.time.Duration;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
-
-import java.time.Duration;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class TournamentTest {
   private final Tournament tournament = TournamentFixture.of();

@@ -1,7 +1,6 @@
 package domains;
 
 import exceptions.WrongNumberOfPlayersError;
-
 import java.util.List;
 
 public class Match {

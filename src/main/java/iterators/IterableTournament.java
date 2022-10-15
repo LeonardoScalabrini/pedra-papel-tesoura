@@ -2,7 +2,6 @@ package iterators;
 
 import domains.Player;
 import exceptions.WrongNumberOfPlayersError;
-
 import java.util.List;
 import java.util.Optional;
 

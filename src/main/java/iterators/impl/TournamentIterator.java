@@ -4,7 +4,6 @@ import domains.Match;
 import domains.Player;
 import exceptions.WrongNumberOfPlayersError;
 import iterators.IterableTournament;
-
 import java.util.*;
 
 public class TournamentIterator implements IterableTournament {

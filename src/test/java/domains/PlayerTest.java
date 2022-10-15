@@ -1,17 +1,16 @@
-import fixtures.PlayerFixture;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import domains.Player;
 import exceptions.NoSuchStrategyError;
-import strategys.StrategyType;
+import fixtures.PlayerFixture;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
-
-import java.util.concurrent.TimeUnit;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import strategys.StrategyType;
 
 @Timeout(value = 10, unit = TimeUnit.MILLISECONDS)
 class PlayerTest {

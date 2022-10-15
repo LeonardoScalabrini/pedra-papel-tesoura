@@ -1,12 +1,11 @@
 package fixtures;
 
-import strategys.StrategyType;
-import strategys.impl.ScissorsBeatsStrategy;
-import org.junit.jupiter.params.provider.Arguments;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import java.util.stream.Stream;
-
-import static org.junit.jupiter.params.provider.Arguments.arguments;
+import org.junit.jupiter.params.provider.Arguments;
+import strategys.StrategyType;
+import strategys.impl.ScissorsBeatsStrategy;
 
 public class ScissorsBeatsMethodSource {
   private static Stream<Arguments> beats() {
