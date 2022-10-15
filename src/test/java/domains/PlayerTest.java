@@ -1,6 +1,7 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import domains.Player;
 import fixtures.PlayerFixture;
 import java.util.concurrent.TimeUnit;
 import main.java.Player;

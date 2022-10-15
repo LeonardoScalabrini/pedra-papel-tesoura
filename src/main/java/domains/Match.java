@@ -1,7 +1,5 @@
-package main.java;
-
 import java.util.List;
-import main.java.exceptions.WrongNumberOfPlayersError;
+import exceptions.WrongNumberOfPlayersError;
 
 public class Match {
 

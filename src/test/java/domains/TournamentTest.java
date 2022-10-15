@@ -1,5 +1,7 @@
 import static org.junit.jupiter.api.Assertions.*;
 
+import domains.Player;
+import domains.Tournament;
 import fixtures.TournamentFixture;
 import java.time.Duration;
 import java.util.List;

@@ -1,8 +1,6 @@
-package main.java;
-
 import java.util.Objects;
-import main.java.exceptions.NoSuchStrategyError;
-import main.java.strategys.StrategyType;
+import exceptions.NoSuchStrategyError;
+import strategys.StrategyType;
 
 public class Player {
 

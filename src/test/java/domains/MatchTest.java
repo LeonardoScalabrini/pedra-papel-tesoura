@@ -3,10 +3,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import main.java.Match;
-import main.java.Player;
-import main.java.exceptions.RPSException;
-import main.java.exceptions.WrongNumberOfPlayersError;
+
+import domains.Match;
+import domains.Player;
+import exceptions.RPSException;
+import exceptions.WrongNumberOfPlayersError;
 import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
