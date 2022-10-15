@@ -1,7 +1,7 @@
-package main.java.strategys.impl;
+package strategys.impl;
 
-import main.java.strategys.BeatsStrategy;
-import main.java.strategys.StrategyType;
+import strategys.BeatsStrategy;
+import strategys.StrategyType;
 
 public class ScissorsBeatsStrategy implements BeatsStrategy {
 

@@ -1,6 +1,9 @@
+package domains;
+
 import exceptions.NoSuchStrategyError;
-import java.util.Objects;
 import strategys.StrategyType;
+
+import java.util.Objects;
 
 public class Player {
 

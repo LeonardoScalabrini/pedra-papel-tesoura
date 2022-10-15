@@ -1,15 +1,16 @@
 package fixtures;
 
-import static fixtures.PlayerFixture.of;
-import static java.util.Arrays.asList;
-import static org.junit.jupiter.params.provider.Arguments.arguments;
+import domains.Player;
+import exceptions.NoSuchStrategyError;
+import strategys.StrategyType;
+import org.junit.jupiter.params.provider.Arguments;
 
 import java.util.Collections;
 import java.util.stream.Stream;
-import main.java.Player;
-import main.java.exceptions.NoSuchStrategyError;
-import main.java.strategys.StrategyType;
-import org.junit.jupiter.params.provider.Arguments;
+
+import static fixtures.PlayerFixture.of;
+import static java.util.Arrays.asList;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 public class PlayerMethodSource {
 

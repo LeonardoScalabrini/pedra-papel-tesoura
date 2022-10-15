@@ -2,11 +2,12 @@ package fixtures;
 
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.Rule;
+import domains.Player;
+import exceptions.NoSuchStrategyError;
+import strategys.StrategyType;
+
 import java.util.ArrayList;
 import java.util.List;
-import main.java.Player;
-import main.java.exceptions.NoSuchStrategyError;
-import main.java.strategys.StrategyType;
 
 public class PlayerFixture {
 

@@ -1,7 +1,7 @@
 package fixtures;
 
-import main.java.Tournament;
-import main.java.iterators.impl.TournamentIterator;
+import domains.Tournament;
+import iterators.impl.TournamentIterator;
 
 public class TournamentFixture {
 

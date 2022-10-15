@@ -1,8 +1,8 @@
-package main.java.strategys;
+package strategys;
 
-import main.java.strategys.impl.PaperBeatsStrategy;
-import main.java.strategys.impl.RockBeatsStrategy;
-import main.java.strategys.impl.ScissorsBeatsStrategy;
+import strategys.impl.PaperBeatsStrategy;
+import strategys.impl.RockBeatsStrategy;
+import strategys.impl.ScissorsBeatsStrategy;
 
 public enum StrategyType {
   R(RockBeatsStrategy.getInstance()),

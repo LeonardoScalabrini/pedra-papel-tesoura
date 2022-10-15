@@ -1,3 +1,3 @@
-package main.java.exceptions;
+package exceptions;
 
 public class WrongNumberOfPlayersError extends RPSException {}

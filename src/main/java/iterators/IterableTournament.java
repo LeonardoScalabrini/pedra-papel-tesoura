@@ -1,9 +1,10 @@
-package main.java.iterators;
+package iterators;
+
+import domains.Player;
+import exceptions.WrongNumberOfPlayersError;
 
 import java.util.List;
 import java.util.Optional;
-import main.java.Player;
-import main.java.exceptions.WrongNumberOfPlayersError;
 
 public interface IterableTournament {
 

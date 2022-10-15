@@ -1,4 +1,4 @@
-package main.java.strategys;
+package strategys;
 
 public interface BeatsStrategy {
 

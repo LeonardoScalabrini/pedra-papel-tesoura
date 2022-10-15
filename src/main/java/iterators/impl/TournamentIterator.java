@@ -1,10 +1,11 @@
-package main.java.iterators.impl;
+package iterators.impl;
+
+import domains.Match;
+import domains.Player;
+import exceptions.WrongNumberOfPlayersError;
+import iterators.IterableTournament;
 
 import java.util.*;
-import main.java.Match;
-import main.java.Player;
-import main.java.exceptions.WrongNumberOfPlayersError;
-import main.java.iterators.IterableTournament;
 
 public class TournamentIterator implements IterableTournament {
 

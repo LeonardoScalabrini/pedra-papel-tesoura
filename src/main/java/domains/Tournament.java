@@ -1,5 +1,8 @@
+package domains;
+
 import exceptions.WrongNumberOfPlayersError;
 import iterators.impl.TournamentIterator;
+
 import java.util.List;
 
 public class Tournament {
