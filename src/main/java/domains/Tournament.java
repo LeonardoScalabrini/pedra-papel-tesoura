@@ -1,6 +1,6 @@
-import java.util.List;
 import exceptions.WrongNumberOfPlayersError;
 import iterators.impl.TournamentIterator;
+import java.util.List;
 
 public class Tournament {
   private final TournamentIterator tournamentIterator;

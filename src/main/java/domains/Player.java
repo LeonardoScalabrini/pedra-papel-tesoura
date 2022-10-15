@@ -1,5 +1,5 @@
-import java.util.Objects;
 import exceptions.NoSuchStrategyError;
+import java.util.Objects;
 import strategys.StrategyType;
 
 public class Player {
