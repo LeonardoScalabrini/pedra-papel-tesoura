@@ -35,6 +35,6 @@ public class PlayerFixture {
   }
 
   public static Player of(String name, StrategyType strategyType) {
-    return new Player(name, strategyType);
+    return Player.newPlayer(name, strategyType);
   }
 }

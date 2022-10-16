@@ -14,33 +14,32 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 class TournamentTest {
-  private final Tournament tournament = TournamentFixture.of();
-
+  
   @ParameterizedTest
   @MethodSource("fixtures.PlayerMethodSource#tournament")
   @Timeout(value = 100, unit = TimeUnit.MILLISECONDS)
   void tournament(List<Player> players, Player winner) {
-    assertEquals(winner, tournament.tournamentWinner(players).orElseThrow());
+    assertEquals(winner, TournamentFixture.of(players).tournamentWinner().orElseThrow());
   }
 
   @ParameterizedTest
   @MethodSource("fixtures.PlayerMethodSource#massive")
   void massive(int timeOut, List<Player> players) {
     assertTimeout(
-        Duration.ofMillis(timeOut), () -> tournament.tournamentWinner(players).orElseThrow());
+        Duration.ofMillis(timeOut), () -> TournamentFixture.of(players).tournamentWinner().orElseThrow());
   }
 
   @ParameterizedTest
   @NullAndEmptySource
   @Timeout(value = 10, unit = TimeUnit.MILLISECONDS)
-  void shouldReturnErrorIfPlayersIsNull(List<Player> playerList) {
-    assertThrows(Exception.class, () -> tournament.tournamentWinner(playerList).orElseThrow());
+  void shouldReturnErrorIfPlayersIsNull(List<Player> players) {
+    assertThrows(Exception.class, () -> TournamentFixture.of(players).tournamentWinner().orElseThrow());
   }
 
   @Test
   @Timeout(value = 10, unit = TimeUnit.MILLISECONDS)
   void shouldReturnWithEmptyOrNullElement() {
-    assertTrue(tournament.tournamentWinner(Collections.emptyList()).isEmpty());
-    assertTrue(tournament.tournamentWinner(Collections.singletonList(null)).isEmpty());
+    assertTrue(TournamentFixture.of(Collections.emptyList()).tournamentWinner().isEmpty());
+    assertTrue(TournamentFixture.of(Collections.singletonList(null)).tournamentWinner().isEmpty());
   }
 }

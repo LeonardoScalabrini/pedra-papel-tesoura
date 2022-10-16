@@ -5,11 +5,15 @@ import strategys.StrategyType;
 
 public class Player {
 
-  public final String name;
+  private final String name;
 
   public final StrategyType strategy;
 
-  public Player(String name, StrategyType strategy) {
+  public static Player newPlayer(String name, StrategyType strategy){
+    return new Player(name, strategy);
+  }
+
+  private Player(String name, StrategyType strategy) {
     Objects.requireNonNull(name);
     Objects.requireNonNull(strategy);
 

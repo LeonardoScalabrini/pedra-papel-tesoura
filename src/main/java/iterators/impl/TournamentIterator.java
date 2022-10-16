@@ -7,18 +7,18 @@ import strategys.MatchStrategy;
 
 public class TournamentIterator implements IterableTournament {
 
-  private MatchStrategy matchStrategy;
-  private List<Player> players = Collections.emptyList();
+  private final MatchStrategy matchStrategy;
+  private List<Player> players;
 
-  public TournamentIterator(MatchStrategy matchStrategy) {
-    Objects.requireNonNull(matchStrategy);
-    this.matchStrategy = matchStrategy;
+  public static TournamentIterator newIterator(List<Player> players, MatchStrategy matchStrategy){
+    return new TournamentIterator(players, matchStrategy);
   }
 
-  @Override
-  public void createIterator(List<Player> players) {
+  private TournamentIterator(List<Player> players, MatchStrategy matchStrategy) {
     Objects.requireNonNull(players);
+    Objects.requireNonNull(matchStrategy);
     this.players = players;
+    this.matchStrategy = matchStrategy;
   }
 
   @Override
