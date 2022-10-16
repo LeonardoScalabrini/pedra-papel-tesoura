@@ -30,17 +30,19 @@ public class TournamentIterator implements IterableTournament {
   public void next() {
     List<Player> winnerPlays = new ArrayList<>();
     List<Player> group = new ArrayList<>();
-    players.stream().forEach(p -> {
-      if (Objects.isNull(p))
-        return;
-      
-      group.add(p);
-      Optional<Player> mayWinner = Match.winner(group);
-      mayWinner.ifPresent((w) -> {
-        winnerPlays.add(w);
-        group.clear();
-      });
-    });
+    players.stream()
+        .forEach(
+            p -> {
+              if (Objects.isNull(p)) return;
+
+              group.add(p);
+              Optional<Player> mayWinner = Match.winner(group);
+              mayWinner.ifPresent(
+                  (w) -> {
+                    winnerPlays.add(w);
+                    group.clear();
+                  });
+            });
     winnerPlays.addAll(group);
     iterations++;
     players = winnerPlays;

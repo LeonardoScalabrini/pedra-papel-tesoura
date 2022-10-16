@@ -20,7 +20,7 @@ public class Tournament {
     while (tournamentIterator.hasNext()) {
       tournamentIterator.next();
     }
-    
+
     return tournamentIterator.winner();
   }
 }

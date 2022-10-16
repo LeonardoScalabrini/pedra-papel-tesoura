@@ -24,7 +24,8 @@ class TournamentTest {
   @ParameterizedTest
   @MethodSource("fixtures.PlayerMethodSource#massive")
   void massive(int timeOut, List<Player> players) {
-    assertTimeout(Duration.ofMillis(timeOut), () -> tournament.tournamentWinner(players).orElseThrow());
+    assertTimeout(
+        Duration.ofMillis(timeOut), () -> tournament.tournamentWinner(players).orElseThrow());
   }
 
   @ParameterizedTest

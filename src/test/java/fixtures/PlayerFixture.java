@@ -6,7 +6,6 @@ import domains.Player;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
-
 import strategys.StrategyType;
 
 public class PlayerFixture {
