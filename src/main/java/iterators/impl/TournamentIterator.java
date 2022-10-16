@@ -1,34 +1,35 @@
 package iterators.impl;
 
-import domains.Match;
 import domains.Player;
 import iterators.IterableTournament;
+import strategys.MatchStrategy;
+
 import java.util.*;
 
 public class TournamentIterator implements IterableTournament {
 
-  private static final int GROUP_NUMBER_PLAYERS = 2;
-  private int totalIterations = 0;
-  private int iterations = 0;
+  private MatchStrategy matchStrategy;
   private List<Player> players = Collections.emptyList();
+
+  public TournamentIterator(MatchStrategy matchStrategy) {
+    Objects.requireNonNull(matchStrategy);
+    this.matchStrategy = matchStrategy;
+  }
 
   @Override
   public void createIterator(List<Player> players) {
     Objects.requireNonNull(players);
-    if (players.isEmpty()) return;
-
-    this.totalIterations = calculeTotalIterations(players);
     this.players = players;
   }
 
   @Override
   public boolean hasNext() {
-    return totalIterations > iterations;
+    return players.size() > 1;
   }
 
   @Override
   public void next() {
-    List<Player> winnerPlays = new ArrayList<>();
+    List<Player> winnerPlayers = new ArrayList<>();
     List<Player> group = new ArrayList<>();
     players.stream()
         .forEach(
@@ -36,30 +37,19 @@ public class TournamentIterator implements IterableTournament {
               if (Objects.isNull(p)) return;
 
               group.add(p);
-              Optional<Player> mayWinner = Match.winner(group);
+              Optional<Player> mayWinner = matchStrategy.winner(group);
               mayWinner.ifPresent(
                   (w) -> {
-                    winnerPlays.add(w);
+                    winnerPlayers.add(w);
                     group.clear();
                   });
             });
-    winnerPlays.addAll(group);
-    iterations++;
-    players = winnerPlays;
+    winnerPlayers.addAll(group);
+    players = winnerPlayers;
   }
 
   @Override
   public Optional<Player> winner() {
-    return players.stream().findFirst();
-  }
-
-  private int calculeTotalIterations(List<Player> players) {
-    var total = players.size();
-    var result = total / GROUP_NUMBER_PLAYERS;
-    var remainder = total % GROUP_NUMBER_PLAYERS;
-
-    if (remainder > 0) result++;
-
-    return result;
+    return players.stream().filter(i -> Objects.nonNull(i)).findFirst();
   }
 }

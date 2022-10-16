@@ -8,6 +8,6 @@ public class TournamentFixture {
   private TournamentFixture() {}
 
   public static Tournament of() {
-    return new Tournament(new TournamentIterator());
+    return new Tournament(new TournamentIterator(SingleMatchStrategyFixture.of()));
   }
 }

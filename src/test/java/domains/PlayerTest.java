@@ -23,6 +23,7 @@ class PlayerTest {
   }
 
   @Test
+  @Timeout(100)
   void shouldThrowWithNullStrategy() {
     assertThrows(Exception.class, () -> PlayerFixture.of("name", null));
   }

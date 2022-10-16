@@ -4,8 +4,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import fixtures.TournamentFixture;
 import java.time.Duration;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -33,5 +36,12 @@ class TournamentTest {
   @Timeout(value = 10, unit = TimeUnit.MILLISECONDS)
   void shouldReturnErrorIfPlayersIsNull(List<Player> playerList) {
     assertThrows(Exception.class, () -> tournament.tournamentWinner(playerList).orElseThrow());
+  }
+
+  @Test
+  @Timeout(value = 10, unit = TimeUnit.MILLISECONDS)
+  void shouldReturnWithEmptyOrNullElement() {
+    assertTrue(tournament.tournamentWinner(Collections.emptyList()).isEmpty());
+    assertTrue(tournament.tournamentWinner(Collections.singletonList(null)).isEmpty());
   }
 }

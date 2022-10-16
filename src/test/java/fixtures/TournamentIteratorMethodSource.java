@@ -12,8 +12,9 @@ public class TournamentIteratorMethodSource {
   private static Stream<Arguments> next() {
     return Stream.of(
         arguments(Collections.emptyList(), 0, false, false, rockPlayer),
+        arguments(Collections.singletonList(null), 1, false, false, rockPlayer),
         arguments(asList(rockPlayer), 1, false, true, rockPlayer),
-        arguments(asList(rockPlayer), 0, true, true, rockPlayer),
+        arguments(asList(rockPlayer), 0, false, true, rockPlayer),
         arguments(asList(rockPlayer, scissorsPlayer), 1, false, true, rockPlayer),
         arguments(asList(rockPlayer, scissorsPlayer), 0, true, true, rockPlayer),
         arguments(asList(scissorsPlayer, paperPlayer, paperPlayer), 2, false, true, scissorsPlayer),
