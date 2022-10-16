@@ -2,9 +2,8 @@ package iterators.impl;
 
 import domains.Player;
 import iterators.IterableTournament;
-import strategys.MatchStrategy;
-
 import java.util.*;
+import strategys.MatchStrategy;
 
 public class TournamentIterator implements IterableTournament {
 

@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import domains.Player;
 import fixtures.SingleMatchStrategyFixture;
-
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;

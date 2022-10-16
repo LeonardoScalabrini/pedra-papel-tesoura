@@ -1,11 +1,10 @@
 package strategys.impl;
 
+import domains.Player;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-
-import domains.Player;
 import strategys.MatchStrategy;
 
 public class SingleMatchStrategy implements MatchStrategy {

@@ -1,10 +1,9 @@
 package strategys;
 
+import domains.Player;
 import java.util.List;
 import java.util.Optional;
 
-import domains.Player;
-
 public interface MatchStrategy {
-    Optional<Player> winner(List<Player> players);
+  Optional<Player> winner(List<Player> players);
 }
