@@ -5,7 +5,6 @@ import static java.util.Arrays.asList;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import domains.Player;
-import exceptions.NoSuchStrategyError;
 import java.util.Collections;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.provider.Arguments;
@@ -18,25 +17,17 @@ public class PlayerMethodSource {
   public static final Player paperPlayer;
 
   static {
-    try {
-      scissorsPlayer = of("scissorsPlayer", StrategyType.S);
-      rockPlayer = of("rockPlayer", StrategyType.R);
-      paperPlayer = of("paperPlayer", StrategyType.P);
-    } catch (NoSuchStrategyError e) {
-      throw new RuntimeException(e);
-    }
+    scissorsPlayer = of("scissorsPlayer", StrategyType.S);
+    rockPlayer = of("rockPlayer", StrategyType.R);
+    paperPlayer = of("paperPlayer", StrategyType.P);
   }
 
   private static Stream<Arguments> equals() {
-    try {
-      return Stream.of(
-          arguments(of("name", StrategyType.S), null, false),
-          arguments(of("name", StrategyType.S), of("diff", StrategyType.S), false),
-          arguments(of("name", StrategyType.R), of("name", StrategyType.S), false),
-          arguments(of("name", StrategyType.S), of("name", StrategyType.S), true));
-    } catch (Exception e) {
-      return Stream.empty();
-    }
+    return Stream.of(
+        arguments(of("name", StrategyType.S), null, false),
+        arguments(of("name", StrategyType.S), of("diff", StrategyType.S), false),
+        arguments(of("name", StrategyType.R), of("name", StrategyType.S), false),
+        arguments(of("name", StrategyType.S), of("name", StrategyType.S), true));
   }
 
   private static Stream<Arguments> winner() {

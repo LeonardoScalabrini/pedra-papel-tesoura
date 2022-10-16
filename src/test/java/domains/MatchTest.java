@@ -3,8 +3,6 @@ package domains;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import exceptions.RPSException;
-import exceptions.WrongNumberOfPlayersError;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Timeout;
@@ -17,14 +15,14 @@ class MatchTest {
 
   @ParameterizedTest
   @MethodSource("fixtures.PlayerMethodSource#winner")
-  void shouldReturnWinner(List<Player> players, Player winner) throws RPSException {
-    assertEquals(winner, Match.winner(players));
+  void shouldReturnWinner(List<Player> players, Player winner) {
+    assertEquals(winner, Match.winner(players).orElseThrow());
   }
 
   @ParameterizedTest
   @NullAndEmptySource
   @MethodSource("fixtures.PlayerMethodSource#wrongNumberOfPlayers")
   void shouldReturnWrongNumberOfPlayersError(List<Player> players) {
-    assertThrows(WrongNumberOfPlayersError.class, () -> Match.winner(players));
+    assertThrows(Exception.class, () -> Match.winner(players));
   }
 }

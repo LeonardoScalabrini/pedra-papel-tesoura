@@ -1,24 +1,26 @@
 package domains;
 
-import exceptions.WrongNumberOfPlayersError;
 import iterators.impl.TournamentIterator;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public class Tournament {
   private final TournamentIterator tournamentIterator;
 
   public Tournament(TournamentIterator tournamentIterator) {
+    Objects.requireNonNull(tournamentIterator);
     this.tournamentIterator = tournamentIterator;
   }
 
-  public Player tournamentWinner(List<Player> players) throws WrongNumberOfPlayersError {
+  public Optional<Player> tournamentWinner(List<Player> players) {
     Objects.requireNonNull(players);
 
     tournamentIterator.createIterator(players);
     while (tournamentIterator.hasNext()) {
       tournamentIterator.next();
     }
-    return tournamentIterator.winner().orElseThrow();
+    
+    return tournamentIterator.winner();
   }
 }

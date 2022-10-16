@@ -3,7 +3,6 @@ package domains;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import exceptions.NoSuchStrategyError;
 import fixtures.PlayerFixture;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
@@ -25,7 +24,7 @@ class PlayerTest {
 
   @Test
   void shouldThrowWithNullStrategy() {
-    assertThrows(NoSuchStrategyError.class, () -> PlayerFixture.of("name", null));
+    assertThrows(Exception.class, () -> PlayerFixture.of("name", null));
   }
 
   @ParameterizedTest

@@ -3,9 +3,10 @@ package fixtures;
 import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.Rule;
 import domains.Player;
-import exceptions.NoSuchStrategyError;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
+
 import strategys.StrategyType;
 
 public class PlayerFixture {
@@ -30,13 +31,11 @@ public class PlayerFixture {
 
   public static List<Player> of(int quantity) {
     List<Player> players = new ArrayList<>();
-    for (int i = 0; i < quantity; i++) {
-      players.add(of());
-    }
+    IntStream.range(1, quantity).forEach((i) -> players.add(of()));
     return players;
   }
 
-  public static Player of(String name, StrategyType strategyType) throws NoSuchStrategyError {
+  public static Player of(String name, StrategyType strategyType) {
     return new Player(name, strategyType);
   }
 }

@@ -2,7 +2,6 @@ package iterators.impl;
 
 import domains.Match;
 import domains.Player;
-import exceptions.WrongNumberOfPlayersError;
 import iterators.IterableTournament;
 import java.util.*;
 
@@ -12,8 +11,6 @@ public class TournamentIterator implements IterableTournament {
   private int totalIterations = 0;
   private int iterations = 0;
   private List<Player> players = Collections.emptyList();
-
-  private Player lastWinner;
 
   @Override
   public void createIterator(List<Player> players) {
@@ -30,16 +27,20 @@ public class TournamentIterator implements IterableTournament {
   }
 
   @Override
-  public void next() throws WrongNumberOfPlayersError {
+  public void next() {
     List<Player> winnerPlays = new ArrayList<>();
     List<Player> group = new ArrayList<>();
-    for (Player player : players) {
-      group.add(player);
-      if (group.size() == GROUP_NUMBER_PLAYERS) {
-        winnerPlays.add(Match.winner(group));
+    players.stream().forEach(p -> {
+      if (Objects.isNull(p))
+        return;
+      
+      group.add(p);
+      Optional<Player> mayWinner = Match.winner(group);
+      mayWinner.ifPresent((w) -> {
+        winnerPlays.add(w);
         group.clear();
-      }
-    }
+      });
+    });
     winnerPlays.addAll(group);
     iterations++;
     players = winnerPlays;

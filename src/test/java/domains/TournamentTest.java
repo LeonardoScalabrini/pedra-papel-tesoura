@@ -2,7 +2,6 @@ package domains;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import exceptions.WrongNumberOfPlayersError;
 import fixtures.TournamentFixture;
 import java.time.Duration;
 import java.util.List;
@@ -18,20 +17,20 @@ class TournamentTest {
   @ParameterizedTest
   @MethodSource("fixtures.PlayerMethodSource#tournament")
   @Timeout(value = 100, unit = TimeUnit.MILLISECONDS)
-  void tournament(List<Player> players, Player winner) throws WrongNumberOfPlayersError {
-    assertEquals(winner, tournament.tournamentWinner(players));
+  void tournament(List<Player> players, Player winner) {
+    assertEquals(winner, tournament.tournamentWinner(players).orElseThrow());
   }
 
   @ParameterizedTest
   @MethodSource("fixtures.PlayerMethodSource#massive")
   void massive(int timeOut, List<Player> players) {
-    assertTimeout(Duration.ofMillis(timeOut), () -> tournament.tournamentWinner(players));
+    assertTimeout(Duration.ofMillis(timeOut), () -> tournament.tournamentWinner(players).orElseThrow());
   }
 
   @ParameterizedTest
   @NullAndEmptySource
   @Timeout(value = 10, unit = TimeUnit.MILLISECONDS)
   void shouldReturnErrorIfPlayersIsNull(List<Player> playerList) {
-    assertThrows(Exception.class, () -> tournament.tournamentWinner(playerList));
+    assertThrows(Exception.class, () -> tournament.tournamentWinner(playerList).orElseThrow());
   }
 }

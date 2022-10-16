@@ -1,6 +1,5 @@
 package domains;
 
-import exceptions.NoSuchStrategyError;
 import java.util.Objects;
 import strategys.StrategyType;
 
@@ -10,14 +9,12 @@ public class Player {
 
   public final StrategyType strategy;
 
-  public Player(String name, StrategyType strategy) throws NoSuchStrategyError {
+  public Player(String name, StrategyType strategy) {
     Objects.requireNonNull(name);
+    Objects.requireNonNull(strategy);
 
-    if (name.isBlank()) throw new NullPointerException();
+    if (name.isBlank()) throw new IllegalArgumentException();
 
-    if (Objects.isNull(strategy)) {
-      throw new NoSuchStrategyError();
-    }
     this.name = name;
     this.strategy = strategy;
   }

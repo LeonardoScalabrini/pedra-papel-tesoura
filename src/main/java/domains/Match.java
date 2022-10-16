@@ -1,26 +1,31 @@
 package domains;
 
-import exceptions.WrongNumberOfPlayersError;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 public class Match {
 
-  private static final int PLAYER_ONE = 0;
-  private static final int PLAYER_TWO = 1;
-  private static final int NUMBER_OF_PLAYERS = 2;
-
   private Match() {}
 
-  public static Player winner(List<Player> players) throws WrongNumberOfPlayersError {
+  public static Optional<Player> winner(List<Player> players)  {
+    Objects.requireNonNull(players);
 
-    if (players == null || players.size() != NUMBER_OF_PLAYERS)
-      throw new WrongNumberOfPlayersError();
+    Iterator<Player> iterable = players.stream().iterator();
 
-    Player playerOne = players.get(PLAYER_ONE);
-    Player playerTwo = players.get(PLAYER_TWO);
+    if(!iterable.hasNext())
+      return Optional.empty();
+    
+      Player playerOne = iterable.next();
 
-    if (playerTwo.strategy.beats(playerOne.strategy)) return playerTwo;
+    if(!iterable.hasNext())
+      return Optional.empty();
+      
+    Player playerTwo = iterable.next();
 
-    return playerOne;
+    if (playerTwo.strategy.beats(playerOne.strategy)) return Optional.ofNullable(playerTwo);
+
+    return Optional.ofNullable(playerOne);
   }
 }

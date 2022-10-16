@@ -1,7 +1,6 @@
 package iterators;
 
 import domains.Player;
-import exceptions.WrongNumberOfPlayersError;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,7 +10,7 @@ public interface IterableTournament {
 
   boolean hasNext();
 
-  void next() throws WrongNumberOfPlayersError;
+  void next();
 
   Optional<Player> winner();
 }

@@ -3,9 +3,10 @@ package iterators.impl;
 import static org.junit.jupiter.api.Assertions.*;
 
 import domains.Player;
-import exceptions.WrongNumberOfPlayersError;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
+
 import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -20,15 +21,12 @@ class TournamentIteratorTest {
       int numberOfIterations,
       boolean expectedNext,
       boolean expectedWinner,
-      Player winner)
-      throws WrongNumberOfPlayersError {
+      Player winner) {
     TournamentIterator iterator = new TournamentIterator();
     iterator.createIterator(players);
-    for (int i = 0; i < numberOfIterations; i++) {
-      iterator.next();
-    }
+    IntStream.range(1, numberOfIterations).forEach((i) -> iterator.next());
     assertEquals(expectedNext, iterator.hasNext());
     assertEquals(expectedWinner, iterator.winner().isPresent());
-    if (expectedWinner) assertEquals(winner, iterator.winner().get());
+    if (expectedWinner) assertEquals(winner, iterator.winner().orElseThrow());
   }
 }
