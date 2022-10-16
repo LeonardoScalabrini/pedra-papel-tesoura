@@ -10,7 +10,7 @@ public class TournamentIterator implements IterableTournament {
   private final MatchStrategy matchStrategy;
   private List<Player> players;
 
-  public static TournamentIterator newIterator(List<Player> players, MatchStrategy matchStrategy){
+  public static TournamentIterator newIterator(List<Player> players, MatchStrategy matchStrategy) {
     return new TournamentIterator(players, matchStrategy);
   }
 

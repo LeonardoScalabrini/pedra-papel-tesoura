@@ -7,10 +7,10 @@ import java.util.Optional;
 public class Tournament {
   private final TournamentIterator tournamentIterator;
 
-  public static Tournament newTournament(TournamentIterator iterator){
+  public static Tournament newTournament(TournamentIterator iterator) {
     return new Tournament(iterator);
   }
-  
+
   private Tournament(TournamentIterator tournamentIterator) {
     Objects.requireNonNull(tournamentIterator);
     this.tournamentIterator = tournamentIterator;

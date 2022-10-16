@@ -9,7 +9,7 @@ public class Player {
 
   public final StrategyType strategy;
 
-  public static Player newPlayer(String name, StrategyType strategy){
+  public static Player newPlayer(String name, StrategyType strategy) {
     return new Player(name, strategy);
   }
 

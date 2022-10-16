@@ -14,7 +14,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 class TournamentTest {
-  
+
   @ParameterizedTest
   @MethodSource("fixtures.PlayerMethodSource#tournament")
   @Timeout(value = 100, unit = TimeUnit.MILLISECONDS)
@@ -26,14 +26,16 @@ class TournamentTest {
   @MethodSource("fixtures.PlayerMethodSource#massive")
   void massive(int timeOut, List<Player> players) {
     assertTimeout(
-        Duration.ofMillis(timeOut), () -> TournamentFixture.of(players).tournamentWinner().orElseThrow());
+        Duration.ofMillis(timeOut),
+        () -> TournamentFixture.of(players).tournamentWinner().orElseThrow());
   }
 
   @ParameterizedTest
   @NullAndEmptySource
   @Timeout(value = 10, unit = TimeUnit.MILLISECONDS)
   void shouldReturnErrorIfPlayersIsNull(List<Player> players) {
-    assertThrows(Exception.class, () -> TournamentFixture.of(players).tournamentWinner().orElseThrow());
+    assertThrows(
+        Exception.class, () -> TournamentFixture.of(players).tournamentWinner().orElseThrow());
   }
 
   @Test
