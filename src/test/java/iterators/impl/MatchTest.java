@@ -1,18 +1,21 @@
-package domains;
+package iterators.impl;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import fixtures.SingleMatchStrategyFixture;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullSource;
+
+import domains.Player;
+import fixtures.SingleMatchStrategyFixture;
 import strategys.impl.SingleMatchStrategy;
 
 @Timeout(value = 100, unit = TimeUnit.MILLISECONDS)
