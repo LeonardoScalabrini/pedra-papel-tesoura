@@ -23,7 +23,7 @@ class TournamentIteratorTest {
       Player winner) {
     TournamentIterator iterator = new TournamentIterator();
     iterator.createIterator(players);
-    IntStream.range(1, numberOfIterations).forEach((i) -> iterator.next());
+    IntStream.range(0, numberOfIterations).forEach((i) -> iterator.next());
     assertEquals(expectedNext, iterator.hasNext());
     assertEquals(expectedWinner, iterator.winner().isPresent());
     if (expectedWinner) assertEquals(winner, iterator.winner().orElseThrow());

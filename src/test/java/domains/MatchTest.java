@@ -1,5 +1,6 @@
 package domains;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -8,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.NullSource;
 
 @Timeout(value = 100, unit = TimeUnit.MILLISECONDS)
 class MatchTest {
@@ -20,9 +21,14 @@ class MatchTest {
   }
 
   @ParameterizedTest
-  @NullAndEmptySource
-  @MethodSource("fixtures.PlayerMethodSource#wrongNumberOfPlayers")
-  void shouldReturnWrongNumberOfPlayersError(List<Player> players) {
-    assertThrows(Exception.class, () -> Match.winner(players));
+  @NullSource
+  void shouldReturnNullPointerError(List<Player> players) {
+    assertThrows(NullPointerException.class, () -> Match.winner(players));
+  }
+
+  @ParameterizedTest
+  @MethodSource("fixtures.PlayerMethodSource#fewPlayers")
+  void shouldReturnWinner(List<Player> players) {
+    assertTrue(Match.winner(players).isEmpty());
   }
 }
