@@ -38,7 +38,7 @@ public class TournamentIterator implements IterableTournament {
               group.add(p);
               Optional<Player> mayWinner = matchStrategy.winner(group);
               mayWinner.ifPresent(
-                  (w) -> {
+                  w -> {
                     winnerPlayers.add(w);
                     group.clear();
                   });
@@ -49,6 +49,6 @@ public class TournamentIterator implements IterableTournament {
 
   @Override
   public Optional<Player> winner() {
-    return players.stream().filter(i -> Objects.nonNull(i)).findFirst();
+    return players.stream().filter(Objects::nonNull).findFirst();
   }
 }
