@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import fixtures.TournamentFixture;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -33,10 +34,16 @@ class TournamentTest {
   @Timeout(value = 10, unit = TimeUnit.MILLISECONDS)
   void shouldReturnWithEmptyOrNullElement() {
     assertThrows(NullPointerException.class, () -> TournamentFixture.of(null));
-    assertTrue(TournamentFixture.of(Collections.emptyList()).tournamentWinner().isEmpty());
+
+    List<Player> players = new ArrayList<>();
+    Tournament tournament = TournamentFixture.of(players);
+    assertTrue(tournament.tournamentWinner().isEmpty());
+
+    players.add(null);
+    final Tournament tournamentThrows = TournamentFixture.of(players);
     assertThrows(
         NullPointerException.class,
-        () -> TournamentFixture.of(Collections.singletonList(null)).tournamentWinner());
+        () -> tournamentThrows.tournamentWinner());
   }
 
   @ParameterizedTest

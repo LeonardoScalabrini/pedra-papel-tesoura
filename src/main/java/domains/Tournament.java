@@ -13,7 +13,7 @@ public class Tournament {
   }
 
   private Tournament(List<Player> players) {
-    this.players = new ArrayList<Player>(requireNonNull(players));
+    this.players = new ArrayList<>(requireNonNull(players));
   }
 
   public Optional<Player> tournamentWinner() {
