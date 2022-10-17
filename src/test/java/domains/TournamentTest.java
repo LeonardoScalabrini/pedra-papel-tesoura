@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import fixtures.TournamentFixture;
 import java.time.Duration;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
@@ -41,9 +40,7 @@ class TournamentTest {
 
     players.add(null);
     final Tournament tournamentThrows = TournamentFixture.of(players);
-    assertThrows(
-        NullPointerException.class,
-        () -> tournamentThrows.tournamentWinner());
+    assertThrows(NullPointerException.class, () -> tournamentThrows.tournamentWinner());
   }
 
   @ParameterizedTest
