@@ -5,10 +5,11 @@ import static java.util.Arrays.asList;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import domains.Player;
+import domains.StrategyType;
+
 import java.util.Collections;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.provider.Arguments;
-import strategys.StrategyType;
 
 public class PlayerMethodSource {
 
@@ -28,21 +29,6 @@ public class PlayerMethodSource {
         arguments(of("name", StrategyType.S), of("diff", StrategyType.S), false),
         arguments(of("name", StrategyType.R), of("name", StrategyType.S), false),
         arguments(of("name", StrategyType.S), of("name", StrategyType.S), true));
-  }
-
-  private static Stream<Arguments> winner() {
-    return Stream.of(
-        arguments(asList(rockPlayer, scissorsPlayer), rockPlayer),
-        arguments(asList(scissorsPlayer, paperPlayer), scissorsPlayer),
-        arguments(asList(paperPlayer, rockPlayer), paperPlayer),
-        arguments(asList(paperPlayer, scissorsPlayer), scissorsPlayer),
-        arguments(asList(scissorsPlayer, scissorsPlayer), scissorsPlayer),
-        arguments(asList(scissorsPlayer, scissorsPlayer, paperPlayer), scissorsPlayer));
-  }
-
-  private static Stream<Arguments> fewPlayers() {
-    return Stream.of(
-        arguments(Collections.singletonList(of())), arguments(Collections.emptyList()));
   }
 
   private static Stream<Arguments> tournament() {
@@ -74,6 +60,6 @@ public class PlayerMethodSource {
         arguments(10, of(10)),
         arguments(10, of(100)),
         arguments(10, of(1000)),
-        arguments(100, of(10000)));
+        arguments(30, of(10000)));
   }
 }

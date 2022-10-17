@@ -1,7 +1,7 @@
 package strategys.impl;
 
+import domains.StrategyType;
 import strategys.BeatsStrategy;
-import strategys.StrategyType;
 
 public class RockBeatsStrategy implements BeatsStrategy {
 

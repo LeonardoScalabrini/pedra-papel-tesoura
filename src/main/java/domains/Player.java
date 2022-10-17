@@ -1,7 +1,7 @@
 package domains;
 
-import java.util.Objects;
-import strategys.StrategyType;
+import static java.util.Objects.requireNonNull;
+import static java.util.Objects.hash;
 
 public class Player {
 
@@ -14,18 +14,15 @@ public class Player {
   }
 
   private Player(String name, StrategyType strategy) {
-    Objects.requireNonNull(name);
-    Objects.requireNonNull(strategy);
-
-    if (name.isBlank()) throw new IllegalArgumentException();
+    if (requireNonNull(name).isBlank()) throw new IllegalArgumentException();
 
     this.name = name;
-    this.strategy = strategy;
+    this.strategy = requireNonNull(strategy);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, strategy);
+    return hash(name, strategy);
   }
 
   @Override

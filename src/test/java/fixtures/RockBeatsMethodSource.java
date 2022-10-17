@@ -4,7 +4,8 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.params.provider.Arguments;
-import strategys.StrategyType;
+
+import domains.StrategyType;
 import strategys.impl.RockBeatsStrategy;
 
 public class RockBeatsMethodSource {

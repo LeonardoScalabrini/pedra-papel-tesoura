@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.NullAndEmptySource;
-import strategys.StrategyType;
 
 @Timeout(value = 10, unit = TimeUnit.MILLISECONDS)
 class PlayerTest {

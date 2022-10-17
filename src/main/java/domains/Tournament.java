@@ -1,26 +1,46 @@
 package domains;
 
-import iterators.impl.TournamentIterator;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
+
+import static java.util.Objects.requireNonNull;
 
 public class Tournament {
-  private final TournamentIterator tournamentIterator;
 
-  public static Tournament newTournament(TournamentIterator iterator) {
-    return new Tournament(iterator);
+  private final List<Player> players;
+
+  public static Tournament newTournament(List<Player> players) {
+    return new Tournament(players);
   }
 
-  private Tournament(TournamentIterator tournamentIterator) {
-    Objects.requireNonNull(tournamentIterator);
-    this.tournamentIterator = tournamentIterator;
+  private Tournament(List<Player> players) {
+    this.players = new ArrayList<Player>(requireNonNull(players));
   }
 
   public Optional<Player> tournamentWinner() {
-    while (tournamentIterator.hasNext()) {
-      tournamentIterator.next();
-    }
+    int size = players.size();
+    int currentIndex = -1;
+    while (size > 1) {
 
-    return tournamentIterator.winner();
+      if (currentIndex >= size - 2){
+        currentIndex = -1;
+      }
+
+      currentIndex++;
+      int firstPlayerIndex = currentIndex;
+      Player firstPlayer = requireNonNull(players.get(firstPlayerIndex));
+
+      currentIndex++;
+      int secondPlayerIndex = currentIndex;
+      Player secondPlayer = requireNonNull(players.get(secondPlayerIndex));
+
+      int defeatedPlayerIndex = secondPlayerIndex;
+      if (secondPlayer.strategy.beats(firstPlayer.strategy))
+        defeatedPlayerIndex = firstPlayerIndex;
+      
+      players.remove(defeatedPlayerIndex);
+      size--;
+      currentIndex--;
+    }
+    return players.stream().findFirst();
   }
 }

@@ -1,5 +1,6 @@
-package strategys;
+package domains;
 
+import strategys.BeatsStrategy;
 import strategys.impl.PaperBeatsStrategy;
 import strategys.impl.RockBeatsStrategy;
 import strategys.impl.ScissorsBeatsStrategy;
