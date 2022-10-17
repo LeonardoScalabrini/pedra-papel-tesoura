@@ -19,7 +19,7 @@ class TournamentTest {
   void tournament(List<Player> players, Player winner) {
     Tournament tournament = TournamentFixture.of(players);
     Player result =
-        assertTimeout(Duration.ofMillis(300), () -> tournament.tournamentWinner().orElseThrow());
+        assertTimeout(Duration.ofMillis(500), () -> tournament.tournamentWinner().orElseThrow());
     assertEquals(winner, result);
   }
 

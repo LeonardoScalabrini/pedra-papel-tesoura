@@ -31,7 +31,6 @@ public class Tournament {
                 emitter.onNext(
                     new int[] {currentIndex.incrementAndGet(), currentIndex.incrementAndGet()});
               }
-              emitter.onComplete();
             });
     stream.subscribe(
         indexList -> {
