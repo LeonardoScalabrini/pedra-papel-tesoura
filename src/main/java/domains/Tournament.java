@@ -33,8 +33,8 @@ public class Tournament {
       int secondPlayerIndex = currentIndex;
       Player secondPlayer = requireNonNull(players.get(secondPlayerIndex));
 
-      int defeatedPlayerIndex = secondPlayerIndex;
-      if (secondPlayer.strategy.beats(firstPlayer.strategy)) defeatedPlayerIndex = firstPlayerIndex;
+      int defeatedPlayerIndex = firstPlayerIndex;
+      if (firstPlayer.strategy.beats(secondPlayer.strategy)) defeatedPlayerIndex = secondPlayerIndex;
 
       players.remove(defeatedPlayerIndex);
       size--;
