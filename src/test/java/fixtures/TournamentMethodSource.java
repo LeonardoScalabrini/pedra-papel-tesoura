@@ -11,14 +11,12 @@ import org.junit.jupiter.params.provider.Arguments;
 public class TournamentMethodSource {
   private static Stream<Arguments> winner() {
     return Stream.of(
-            arguments(Collections.emptyList(), false, rockPlayer),
+        arguments(Collections.emptyList(), false, rockPlayer),
         arguments(asList(rockPlayer), true, rockPlayer),
         arguments(asList(rockPlayer, scissorsPlayer), true, rockPlayer),
         arguments(asList(scissorsPlayer, paperPlayer, paperPlayer), true, scissorsPlayer),
         arguments(
-            asList(paperPlayer, rockPlayer, scissorsPlayer, paperPlayer),
-            true,
-            scissorsPlayer),
+            asList(paperPlayer, rockPlayer, scissorsPlayer, paperPlayer), true, scissorsPlayer),
         arguments(
             asList(paperPlayer, rockPlayer, scissorsPlayer, paperPlayer, rockPlayer),
             true,

@@ -34,15 +34,14 @@ class TournamentTest {
   void shouldReturnWithEmptyOrNullElement() {
     assertThrows(NullPointerException.class, () -> TournamentFixture.of(null));
     assertTrue(TournamentFixture.of(Collections.emptyList()).tournamentWinner().isEmpty());
-    assertThrows(NullPointerException.class, () -> TournamentFixture.of(Collections.singletonList(null)).tournamentWinner());
+    assertThrows(
+        NullPointerException.class,
+        () -> TournamentFixture.of(Collections.singletonList(null)).tournamentWinner());
   }
 
   @ParameterizedTest
   @MethodSource("fixtures.TournamentMethodSource#winner")
-  void winner(
-      List<Player> players,
-      boolean expectedWinner,
-      Player winner) {
+  void winner(List<Player> players, boolean expectedWinner, Player winner) {
     Tournament tournament = TournamentFixture.of(players);
     assertEquals(expectedWinner, tournament.tournamentWinner().isPresent());
     if (expectedWinner) assertEquals(winner, tournament.tournamentWinner().orElseThrow());

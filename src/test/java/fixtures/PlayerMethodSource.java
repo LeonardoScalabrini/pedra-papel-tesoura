@@ -6,8 +6,6 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 import domains.Player;
 import domains.StrategyType;
-
-import java.util.Collections;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.provider.Arguments;
 

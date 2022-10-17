@@ -2,10 +2,9 @@ package fixtures;
 
 import static org.junit.jupiter.params.provider.Arguments.arguments;
 
+import domains.StrategyType;
 import java.util.stream.Stream;
 import org.junit.jupiter.params.provider.Arguments;
-
-import domains.StrategyType;
 import strategys.impl.RockBeatsStrategy;
 
 public class RockBeatsMethodSource {

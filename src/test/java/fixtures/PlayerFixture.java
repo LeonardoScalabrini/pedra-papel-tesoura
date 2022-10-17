@@ -4,7 +4,6 @@ import br.com.six2six.fixturefactory.Fixture;
 import br.com.six2six.fixturefactory.Rule;
 import domains.Player;
 import domains.StrategyType;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;

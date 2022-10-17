@@ -1,8 +1,8 @@
 package domains;
 
-import java.util.*;
-
 import static java.util.Objects.requireNonNull;
+
+import java.util.*;
 
 public class Tournament {
 
@@ -21,7 +21,7 @@ public class Tournament {
     int currentIndex = -1;
     while (size > 1) {
 
-      if (currentIndex >= size - 2){
+      if (currentIndex >= size - 2) {
         currentIndex = -1;
       }
 
@@ -34,9 +34,8 @@ public class Tournament {
       Player secondPlayer = requireNonNull(players.get(secondPlayerIndex));
 
       int defeatedPlayerIndex = secondPlayerIndex;
-      if (secondPlayer.strategy.beats(firstPlayer.strategy))
-        defeatedPlayerIndex = firstPlayerIndex;
-      
+      if (secondPlayer.strategy.beats(firstPlayer.strategy)) defeatedPlayerIndex = firstPlayerIndex;
+
       players.remove(defeatedPlayerIndex);
       size--;
       currentIndex--;
