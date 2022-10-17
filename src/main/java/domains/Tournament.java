@@ -32,22 +32,21 @@ public class Tournament {
                     new int[] {currentIndex.incrementAndGet(), currentIndex.incrementAndGet()});
               }
               emitter.onComplete();
-        });
-        stream
-        .subscribe(
-            indexList -> {
-              int indexOne = indexList[0];
-              int indexTwo = indexList[1];
-              Player playerOne = requireNonNull(players.get(indexOne));
-              Player playerTwo = requireNonNull(players.get(indexTwo));
-              int indexToRemove = indexOne;
-              if (playerOne.strategy.beats(playerTwo.strategy)) {
-                indexToRemove = indexTwo;
-              }
-              players.remove(indexToRemove);
-              size.decrementAndGet();
-              currentIndex.decrementAndGet();
             });
+    stream.subscribe(
+        indexList -> {
+          int indexOne = indexList[0];
+          int indexTwo = indexList[1];
+          Player playerOne = requireNonNull(players.get(indexOne));
+          Player playerTwo = requireNonNull(players.get(indexTwo));
+          int indexToRemove = indexOne;
+          if (playerOne.strategy.beats(playerTwo.strategy)) {
+            indexToRemove = indexTwo;
+          }
+          players.remove(indexToRemove);
+          size.decrementAndGet();
+          currentIndex.decrementAndGet();
+        });
 
     return players.stream().findAny();
   }

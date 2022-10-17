@@ -18,9 +18,8 @@ class TournamentTest {
   @MethodSource("fixtures.PlayerMethodSource#tournament")
   void tournament(List<Player> players, Player winner) {
     Tournament tournament = TournamentFixture.of(players);
-    Player result = assertTimeout(
-            Duration.ofMillis(300),
-            () -> tournament.tournamentWinner().orElseThrow());
+    Player result =
+        assertTimeout(Duration.ofMillis(300), () -> tournament.tournamentWinner().orElseThrow());
     assertEquals(winner, result);
   }
 
@@ -28,9 +27,7 @@ class TournamentTest {
   @MethodSource("fixtures.PlayerMethodSource#massive")
   void massive(int timeOut, List<Player> players) {
     Tournament tournament = TournamentFixture.of(players);
-    assertTimeout(
-        Duration.ofMillis(timeOut),
-        () -> tournament.tournamentWinner().orElseThrow());
+    assertTimeout(Duration.ofMillis(timeOut), () -> tournament.tournamentWinner().orElseThrow());
   }
 
   @Test
