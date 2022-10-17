@@ -16,17 +16,21 @@ class TournamentTest {
 
   @ParameterizedTest
   @MethodSource("fixtures.PlayerMethodSource#tournament")
-  @Timeout(value = 100, unit = TimeUnit.MILLISECONDS)
   void tournament(List<Player> players, Player winner) {
-    assertEquals(winner, TournamentFixture.of(players).tournamentWinner().orElseThrow());
+    Tournament tournament = TournamentFixture.of(players);
+    Player result = assertTimeout(
+            Duration.ofMillis(300),
+            () -> tournament.tournamentWinner().orElseThrow());
+    assertEquals(winner, result);
   }
 
   @ParameterizedTest
   @MethodSource("fixtures.PlayerMethodSource#massive")
   void massive(int timeOut, List<Player> players) {
+    Tournament tournament = TournamentFixture.of(players);
     assertTimeout(
         Duration.ofMillis(timeOut),
-        () -> TournamentFixture.of(players).tournamentWinner().orElseThrow());
+        () -> tournament.tournamentWinner().orElseThrow());
   }
 
   @Test

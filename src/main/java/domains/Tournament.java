@@ -32,10 +32,9 @@ public class Tournament {
                     new int[] {currentIndex.incrementAndGet(), currentIndex.incrementAndGet()});
               }
               emitter.onComplete();
-            });
-
-    stream
-        .doOnNext(
+        });
+        stream
+        .subscribe(
             indexList -> {
               int indexOne = indexList[0];
               int indexTwo = indexList[1];
@@ -48,8 +47,8 @@ public class Tournament {
               players.remove(indexToRemove);
               size.decrementAndGet();
               currentIndex.decrementAndGet();
-            })
-        .publish();
-    return players.stream().findFirst();
+            });
+
+    return players.stream().findAny();
   }
 }
