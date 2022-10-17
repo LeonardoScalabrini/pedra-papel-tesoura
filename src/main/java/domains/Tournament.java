@@ -1,8 +1,11 @@
 package domains;
 
+import io.reactivex.Observable;
+
 import static java.util.Objects.requireNonNull;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Tournament {
 
@@ -17,30 +20,33 @@ public class Tournament {
   }
 
   public Optional<Player> tournamentWinner() {
-    int size = players.size();
-    int currentIndex = -1;
-    while (size > 1) {
-
-      if (currentIndex >= size - 2) {
-        currentIndex = -1;
+    final AtomicInteger size = new AtomicInteger(players.size());
+    final AtomicInteger currentIndex = new AtomicInteger(-1);
+    Observable<int[]> stream = Observable.create(emitter -> {
+      while (size.get() > 1) {
+        if (currentIndex.get() >= size.get() - 2) {
+          currentIndex.set(-1);
+        }
+        emitter.onNext(new int[]{currentIndex.incrementAndGet(), currentIndex.incrementAndGet()});
       }
+      emitter.onComplete();
+    });
 
-      currentIndex++;
-      int firstPlayerIndex = currentIndex;
-      Player firstPlayer = requireNonNull(players.get(firstPlayerIndex));
-
-      currentIndex++;
-      int secondPlayerIndex = currentIndex;
-      Player secondPlayer = requireNonNull(players.get(secondPlayerIndex));
-
-      int defeatedPlayerIndex = firstPlayerIndex;
-      if (firstPlayer.strategy.beats(secondPlayer.strategy))
-        defeatedPlayerIndex = secondPlayerIndex;
-
-      players.remove(defeatedPlayerIndex);
-      size--;
-      currentIndex--;
-    }
+    stream
+    .doOnNext(indexList -> {
+      int indexOne = indexList[0];
+      int indexTwo = indexList[1];
+      Player playerOne = requireNonNull(players.get(indexOne));
+      Player playerTwo = requireNonNull(players.get(indexTwo));
+      int indexToRemove = indexOne;
+      if (playerOne.strategy.beats(playerTwo.strategy)) {
+        indexToRemove = indexTwo;
+      }
+      players.remove(indexToRemove);
+      size.decrementAndGet();
+      currentIndex.decrementAndGet();
+    })
+    .publish();
     return players.stream().findFirst();
   }
 }
