@@ -3,7 +3,6 @@ package domains;
 import static java.util.Objects.requireNonNull;
 
 import io.reactivex.Observable;
-
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -35,22 +34,24 @@ public class Tournament {
               emitter.onComplete();
             });
 
-    return stream.doOnNext(
-        indexList -> {
-          int indexOne = indexList[0];
-          int indexTwo = indexList[1];
-          Player playerOne = requireNonNull(players.get(indexOne));
-          Player playerTwo = requireNonNull(players.get(indexTwo));
-          int indexToRemove = indexOne;
-          if (playerOne.strategy.beats(playerTwo.strategy)) {
-            indexToRemove = indexTwo;
-          }
-          players.remove(indexToRemove);
-          size.decrementAndGet();
-          currentIndex.decrementAndGet();
-        }).defaultIfEmpty(new int[0])
-            .map(ints -> players.stream().findAny())
-            .defaultIfEmpty(Optional.empty())
-            .onErrorReturn((e) -> Optional.empty());
+    return stream
+        .doOnNext(
+            indexList -> {
+              int indexOne = indexList[0];
+              int indexTwo = indexList[1];
+              Player playerOne = requireNonNull(players.get(indexOne));
+              Player playerTwo = requireNonNull(players.get(indexTwo));
+              int indexToRemove = indexOne;
+              if (playerOne.strategy.beats(playerTwo.strategy)) {
+                indexToRemove = indexTwo;
+              }
+              players.remove(indexToRemove);
+              size.decrementAndGet();
+              currentIndex.decrementAndGet();
+            })
+        .defaultIfEmpty(new int[0])
+        .map(ints -> players.stream().findAny())
+        .defaultIfEmpty(Optional.empty())
+        .onErrorReturn((e) -> Optional.empty());
   }
 }

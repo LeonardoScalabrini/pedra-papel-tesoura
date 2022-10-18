@@ -17,7 +17,9 @@ class TournamentTest {
   @MethodSource("fixtures.PlayerMethodSource#tournament")
   void tournament(List<Player> players, Player winner) {
     Tournament tournament = TournamentFixture.of(players);
-    var results = tournament.tournamentWinner()
+    var results =
+        tournament
+            .tournamentWinner()
             .timeout(10, TimeUnit.MILLISECONDS)
             .test()
             .assertComplete()
@@ -32,7 +34,9 @@ class TournamentTest {
   @MethodSource("fixtures.PlayerMethodSource#massive")
   void massive(int timeOut, List<Player> players) {
     Tournament tournament = TournamentFixture.of(players);
-    var results = tournament.tournamentWinner()
+    var results =
+        tournament
+            .tournamentWinner()
             .timeout(timeOut, TimeUnit.MILLISECONDS)
             .test()
             .assertComplete()
@@ -49,24 +53,26 @@ class TournamentTest {
 
     List<Player> players = new ArrayList<>();
     Tournament tournament = TournamentFixture.of(players);
-    tournament.tournamentWinner()
-            .timeout(10, TimeUnit.MILLISECONDS)
-            .test()
-            .assertComplete()
-            .assertNoErrors()
-            .assertValue(Optional.empty())
-            .assertNoTimeout()
-            .assertSubscribed();
+    tournament
+        .tournamentWinner()
+        .timeout(10, TimeUnit.MILLISECONDS)
+        .test()
+        .assertComplete()
+        .assertNoErrors()
+        .assertValue(Optional.empty())
+        .assertNoTimeout()
+        .assertSubscribed();
 
     players.add(null);
     final Tournament tournamentThrows = TournamentFixture.of(players);
-    tournamentThrows.tournamentWinner()
-            .timeout(10, TimeUnit.MILLISECONDS)
-            .test()
-            .assertComplete()
-            .assertValue(Optional.empty())
-            .assertNoTimeout()
-            .assertSubscribed();
+    tournamentThrows
+        .tournamentWinner()
+        .timeout(10, TimeUnit.MILLISECONDS)
+        .test()
+        .assertComplete()
+        .assertValue(Optional.empty())
+        .assertNoTimeout()
+        .assertSubscribed();
   }
 
   @ParameterizedTest
@@ -74,7 +80,9 @@ class TournamentTest {
   void winner(List<Player> players, boolean expectedWinner, Player winner) {
     Tournament tournament = TournamentFixture.of(players);
     final Optional<Player> valueExpected = expectedWinner ? Optional.of(winner) : Optional.empty();
-    var results = tournament.tournamentWinner()
+    var results =
+        tournament
+            .tournamentWinner()
             .timeout(10, TimeUnit.MILLISECONDS)
             .test()
             .assertComplete()
