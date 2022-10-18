@@ -3,12 +3,11 @@ package domains;
 import static org.junit.jupiter.api.Assertions.*;
 
 import fixtures.TournamentFixture;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -18,37 +17,71 @@ class TournamentTest {
   @MethodSource("fixtures.PlayerMethodSource#tournament")
   void tournament(List<Player> players, Player winner) {
     Tournament tournament = TournamentFixture.of(players);
-    Player result =
-        assertTimeout(Duration.ofMillis(500), () -> tournament.tournamentWinner().orElseThrow());
-    assertEquals(winner, result);
+    var results = tournament.tournamentWinner()
+            .timeout(10, TimeUnit.MILLISECONDS)
+            .test()
+            .assertComplete()
+            .assertNoErrors()
+            .assertNoTimeout()
+            .assertSubscribed()
+            .values();
+    assertEquals(winner, results.get(results.size() - 1).orElseThrow());
   }
 
   @ParameterizedTest
   @MethodSource("fixtures.PlayerMethodSource#massive")
   void massive(int timeOut, List<Player> players) {
     Tournament tournament = TournamentFixture.of(players);
-    assertTimeout(Duration.ofMillis(timeOut), () -> tournament.tournamentWinner().orElseThrow());
+    var results = tournament.tournamentWinner()
+            .timeout(timeOut, TimeUnit.MILLISECONDS)
+            .test()
+            .assertComplete()
+            .assertNoErrors()
+            .assertNoTimeout()
+            .assertSubscribed()
+            .values();
+    assertTrue(results.get(results.size() - 1).isPresent());
   }
 
   @Test
-  @Timeout(value = 10, unit = TimeUnit.MILLISECONDS)
   void shouldReturnWithEmptyOrNullElement() {
     assertThrows(NullPointerException.class, () -> TournamentFixture.of(null));
 
     List<Player> players = new ArrayList<>();
     Tournament tournament = TournamentFixture.of(players);
-    assertTrue(tournament.tournamentWinner().isEmpty());
+    tournament.tournamentWinner()
+            .timeout(10, TimeUnit.MILLISECONDS)
+            .test()
+            .assertComplete()
+            .assertNoErrors()
+            .assertValue(Optional.empty())
+            .assertNoTimeout()
+            .assertSubscribed();
 
     players.add(null);
     final Tournament tournamentThrows = TournamentFixture.of(players);
-    assertThrows(NullPointerException.class, () -> tournamentThrows.tournamentWinner());
+    tournamentThrows.tournamentWinner()
+            .timeout(10, TimeUnit.MILLISECONDS)
+            .test()
+            .assertComplete()
+            .assertValue(Optional.empty())
+            .assertNoTimeout()
+            .assertSubscribed();
   }
 
   @ParameterizedTest
   @MethodSource("fixtures.TournamentMethodSource#winner")
   void winner(List<Player> players, boolean expectedWinner, Player winner) {
     Tournament tournament = TournamentFixture.of(players);
-    assertEquals(expectedWinner, tournament.tournamentWinner().isPresent());
-    if (expectedWinner) assertEquals(winner, tournament.tournamentWinner().orElseThrow());
+    final Optional<Player> valueExpected = expectedWinner ? Optional.of(winner) : Optional.empty();
+    var results = tournament.tournamentWinner()
+            .timeout(10, TimeUnit.MILLISECONDS)
+            .test()
+            .assertComplete()
+            .assertNoErrors()
+            .assertNoTimeout()
+            .assertSubscribed()
+            .values();
+    assertEquals(valueExpected, results.get(results.size() - 1));
   }
 }

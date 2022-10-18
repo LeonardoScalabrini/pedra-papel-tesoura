@@ -12,7 +12,7 @@ public class TournamentMethodSource {
   private static Stream<Arguments> winner() {
     return Stream.of(
         arguments(Collections.emptyList(), false, rockPlayer),
-        arguments(asList(rockPlayer), true, rockPlayer),
+        arguments(Collections.singletonList(rockPlayer), true, rockPlayer),
         arguments(asList(rockPlayer, scissorsPlayer), true, rockPlayer),
         arguments(asList(scissorsPlayer, paperPlayer, paperPlayer), true, scissorsPlayer),
         arguments(

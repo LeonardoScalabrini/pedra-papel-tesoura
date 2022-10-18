@@ -3,6 +3,7 @@ package domains;
 import static java.util.Objects.requireNonNull;
 
 import io.reactivex.Observable;
+
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -18,7 +19,7 @@ public class Tournament {
     this.players = new ArrayList<>(requireNonNull(players));
   }
 
-  public Optional<Player> tournamentWinner() {
+  public Observable<Optional<Player>> tournamentWinner() {
     final AtomicInteger size = new AtomicInteger(players.size());
     final AtomicInteger currentIndex = new AtomicInteger(-1);
     Observable<int[]> stream =
@@ -31,8 +32,10 @@ public class Tournament {
                 emitter.onNext(
                     new int[] {currentIndex.incrementAndGet(), currentIndex.incrementAndGet()});
               }
+              emitter.onComplete();
             });
-    stream.subscribe(
+
+    return stream.doOnNext(
         indexList -> {
           int indexOne = indexList[0];
           int indexTwo = indexList[1];
@@ -45,8 +48,9 @@ public class Tournament {
           players.remove(indexToRemove);
           size.decrementAndGet();
           currentIndex.decrementAndGet();
-        });
-
-    return players.stream().findAny();
+        }).defaultIfEmpty(new int[0])
+            .map(ints -> players.stream().findAny())
+            .defaultIfEmpty(Optional.empty())
+            .onErrorReturn((e) -> Optional.empty());
   }
 }
