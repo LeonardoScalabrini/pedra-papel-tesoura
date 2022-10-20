@@ -32,7 +32,7 @@ class TournamentTest {
   void massive(int timeOut, List<Player> players) {
     Tournament tournament = TournamentFixture.of(players);
     var test = tournament.tournamentWinner().test();
-    test.awaitTerminalEvent(10, TimeUnit.MILLISECONDS);
+    test.awaitTerminalEvent(timeOut, TimeUnit.MILLISECONDS);
     test.assertValueCount(1)
         .assertComplete()
         .assertNoErrors()
