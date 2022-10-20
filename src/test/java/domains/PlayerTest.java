@@ -1,8 +1,10 @@
 package domains;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import fixtures.PlayerFixture;
 import java.util.concurrent.TimeUnit;
@@ -32,17 +34,17 @@ class PlayerTest {
 
     String name = "name";
     Player expected = PlayerFixture.of(name, StrategyType.S);
-    assertEquals(expected, expected);
+    assertTrue(expected.equals(expected));
     assertEquals(31 * name.hashCode() + StrategyType.S.hashCode(), expected.hashCode());
     assertEquals(expected.hashCode(), expected.hashCode());
-    assertEquals(expected, PlayerFixture.of(name, StrategyType.S));
+    assertTrue(expected.equals(PlayerFixture.of(name, StrategyType.S)));
     assertEquals(expected.hashCode(), PlayerFixture.of(name, StrategyType.S).hashCode());
-    assertNotEquals(null, expected);
-    assertNotEquals(expected, PlayerFixture.of("notequals", StrategyType.S));
+    assertFalse(expected.equals(null));
+    assertFalse(expected.equals(PlayerFixture.of("notequals", StrategyType.S)));
     assertNotEquals(expected.hashCode(), PlayerFixture.of("notequals", StrategyType.S).hashCode());
-    assertNotEquals(expected, PlayerFixture.of(name, StrategyType.P));
+    assertFalse(expected.equals(PlayerFixture.of(name, StrategyType.P)));
     assertNotEquals(expected.hashCode(), PlayerFixture.of(name, StrategyType.P).hashCode());
-    assertNotEquals(expected, PlayerFixture.of("notequals", StrategyType.P));
+    assertFalse(expected.equals(PlayerFixture.of("notequals", StrategyType.P)));
     assertNotEquals(expected.hashCode(), PlayerFixture.of("notequals", StrategyType.P).hashCode());
   }
 
