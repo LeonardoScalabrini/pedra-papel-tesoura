@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import io.reactivex.Observable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
-
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -37,25 +36,28 @@ public class Tournament {
               emitter.onComplete();
             });
 
-    Consumer<int[]> consumer = intList -> {
-      int indexOne = intList[0];
-              int indexTwo = intList[1];
-              Player playerOne = requireNonNull(players.get(indexOne));
-              Player playerTwo = requireNonNull(players.get(indexTwo));
-              int indexToRemove = indexOne;
-              if (playerOne.strategy.beats(playerTwo.strategy)) {
-                indexToRemove = indexTwo;
-              }
-              players.remove(indexToRemove);
-              size.decrementAndGet();
-              currentIndex.decrementAndGet();
-    };
-    
-    return Observable.defer(() ->
-      stream.subscribeOn(Schedulers.computation())
-      .doOnNext(consumer)
-      .last(new int[]{})
-      .flatMapObservable(t -> Observable.just(players.stream().findAny()))
-      .onErrorReturn((e) -> Optional.empty()));
+    Consumer<int[]> consumer =
+        intList -> {
+          int indexOne = intList[0];
+          int indexTwo = intList[1];
+          Player playerOne = requireNonNull(players.get(indexOne));
+          Player playerTwo = requireNonNull(players.get(indexTwo));
+          int indexToRemove = indexOne;
+          if (playerOne.strategy.beats(playerTwo.strategy)) {
+            indexToRemove = indexTwo;
+          }
+          players.remove(indexToRemove);
+          size.decrementAndGet();
+          currentIndex.decrementAndGet();
+        };
+
+    return Observable.defer(
+        () ->
+            stream
+                .subscribeOn(Schedulers.computation())
+                .doOnNext(consumer)
+                .last(new int[] {})
+                .flatMapObservable(t -> Observable.just(players.stream().findAny()))
+                .onErrorReturn((e) -> Optional.empty()));
   }
 }

@@ -42,10 +42,14 @@ public class Player {
 
   @Override
   public String toString() {
-    return "Player{" +
-            "hashCode=" + hashCode +
-            ", name='" + name + '\'' +
-            ", strategy=" + strategy +
-            '}';
+    return "Player{"
+        + "hashCode="
+        + hashCode
+        + ", name='"
+        + name
+        + '\''
+        + ", strategy="
+        + strategy
+        + '}';
   }
 }
