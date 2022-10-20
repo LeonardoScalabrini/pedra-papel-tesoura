@@ -3,6 +3,9 @@ package domains;
 import static java.util.Objects.requireNonNull;
 
 import io.reactivex.Observable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -34,11 +37,9 @@ public class Tournament {
               emitter.onComplete();
             });
 
-    return stream
-        .doOnNext(
-            indexList -> {
-              int indexOne = indexList[0];
-              int indexTwo = indexList[1];
+    Consumer<int[]> consumer = intList -> {
+      int indexOne = intList[0];
+              int indexTwo = intList[1];
               Player playerOne = requireNonNull(players.get(indexOne));
               Player playerTwo = requireNonNull(players.get(indexTwo));
               int indexToRemove = indexOne;
@@ -48,10 +49,13 @@ public class Tournament {
               players.remove(indexToRemove);
               size.decrementAndGet();
               currentIndex.decrementAndGet();
-            })
-        .defaultIfEmpty(new int[0])
-        .map(ints -> players.stream().findAny())
-        .defaultIfEmpty(Optional.empty())
-        .onErrorReturn((e) -> Optional.empty());
+    };
+    
+    return Observable.defer(() ->
+      stream.subscribeOn(Schedulers.computation())
+      .doOnNext(consumer)
+      .last(new int[]{})
+      .flatMapObservable(t -> Observable.just(players.stream().findAny()))
+      .onErrorReturn((e) -> Optional.empty()));
   }
 }

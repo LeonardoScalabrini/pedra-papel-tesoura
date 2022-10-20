@@ -1,7 +1,5 @@
 package fixtures;
 
-import br.com.six2six.fixturefactory.Fixture;
-import br.com.six2six.fixturefactory.Rule;
 import domains.Player;
 import domains.StrategyType;
 import java.util.ArrayList;
@@ -10,22 +8,10 @@ import java.util.stream.IntStream;
 
 public class PlayerFixture {
 
-  static {
-    Fixture.of(Player.class)
-        .addTemplate(
-            "random",
-            new Rule() {
-              {
-                add("name", random("One", "Two", "Three"));
-                add("strategy", random(StrategyType.P, StrategyType.R, StrategyType.S));
-              }
-            });
-  }
-
   private PlayerFixture() {}
 
   public static Player of() {
-    return Fixture.from(Player.class).gimme("random");
+    return of("name", StrategyType.S);
   }
 
   public static List<Player> of(int quantity) {

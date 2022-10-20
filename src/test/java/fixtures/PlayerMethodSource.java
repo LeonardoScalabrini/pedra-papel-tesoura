@@ -21,14 +21,6 @@ public class PlayerMethodSource {
     paperPlayer = of("paperPlayer", StrategyType.P);
   }
 
-  private static Stream<Arguments> equals() {
-    return Stream.of(
-        arguments(of("name", StrategyType.S), null, false),
-        arguments(of("name", StrategyType.S), of("diff", StrategyType.S), false),
-        arguments(of("name", StrategyType.R), of("name", StrategyType.S), false),
-        arguments(of("name", StrategyType.S), of("name", StrategyType.S), true));
-  }
-
   private static Stream<Arguments> tournament() {
     return Stream.of(
         arguments(asList(rockPlayer, scissorsPlayer), rockPlayer),
