@@ -58,6 +58,6 @@ public class Tournament {
                 .doOnNext(consumer)
                 .last(new int[] {})
                 .flatMapObservable(t -> Observable.just(players.stream().findAny()))
-                .onErrorReturn((e) -> Optional.empty()));
+                .onErrorReturn(e -> Optional.empty()));
   }
 }

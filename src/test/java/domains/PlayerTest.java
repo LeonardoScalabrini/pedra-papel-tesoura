@@ -37,7 +37,7 @@ class PlayerTest {
     assertEquals(expected.hashCode(), expected.hashCode());
     assertEquals(expected, PlayerFixture.of(name, StrategyType.S));
     assertEquals(expected.hashCode(), PlayerFixture.of(name, StrategyType.S).hashCode());
-    assertNotEquals(expected, null);
+    assertNotEquals(null, expected);
     assertNotEquals(expected, PlayerFixture.of("notequals", StrategyType.S));
     assertNotEquals(expected.hashCode(), PlayerFixture.of("notequals", StrategyType.S).hashCode());
     assertNotEquals(expected, PlayerFixture.of(name, StrategyType.P));
