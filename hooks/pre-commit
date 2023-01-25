@@ -4,7 +4,7 @@ echo "*****Running check code******"
 
 git stash -q --keep-index
 
-./gradlew goJF
+#./gradlew goJF
 ./gradlew lintGradle
 ./gradlew fixGradleLint
 ./gradlew generateGradleLintReport
