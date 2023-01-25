@@ -2,15 +2,11 @@
 
 echo "*****Running check tests******"
 
-git stash -q --keep-index
-
 ./gradlew test
 ./gradlew pitest
 ./gradlew check
 
 status=$?
-
-git stash pop -q
 
 echo "*****Done with check tests******"
 

@@ -32,8 +32,6 @@ fi
 
 status=$?
 
-git stash pop -q
-
 echo "*****Done with check code******"
 
 exit $status
