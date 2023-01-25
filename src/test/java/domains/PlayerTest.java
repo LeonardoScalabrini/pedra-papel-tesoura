@@ -36,6 +36,7 @@ class PlayerTest {
     String name = "name";
     Player expected = PlayerFixture.of(name, StrategyType.S);
     assertEquals(expected, expected);
+    assertNotEquals(expected, new Object());
     assertEquals(31 * name.hashCode() + StrategyType.S.hashCode(), expected.hashCode());
     assertEquals(expected.hashCode(), expected.hashCode());
     assertEquals(expected, PlayerFixture.of(name, StrategyType.S));
